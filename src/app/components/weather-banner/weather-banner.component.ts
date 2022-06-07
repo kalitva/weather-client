@@ -1,21 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { WeatherService } from 'src/app/services/weather.service';
+import { Directive, Input } from '@angular/core';
+import { WeatherApiService } from 'src/app/services/weather-api.service';
 
-@Component({
-  selector: 'app-weather-banner',
-  templateUrl: './weather-banner.component.html',
-  styleUrls: ['./weather-banner.component.css']
-})
-export abstract class WeatherBannerComponent implements OnInit {
+@Directive()
+export abstract class WeatherBannerComponent {
   @Input() city: string;
-	@Input() day: Date;
 
-  constructor(private weatherService: WeatherService) {
-  }
-
-  ngOnInit(): void {
-    this.weatherService.getWeather(this.city, this.day)
-      .subscribe(r => console.dir(r));
+  constructor(protected apiService: WeatherApiService) {
   }
 
 	public abstract formattedTempValue(): string;
