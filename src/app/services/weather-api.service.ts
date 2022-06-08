@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
-import { Weather } from "../model/weather";
+import { Observable } from 'rxjs';
+import { Weather } from '../model/weather';
 
 export abstract class WeatherApiService {
 

@@ -11,8 +11,8 @@ import { VisualCrossingWeatherApiService } from './services/visual-crossing-weat
 @NgModule({
   declarations: [
     AppComponent,
-		DayWeatherBannerComponent,
-		CurrentWeatherBannerComponent
+    DayWeatherBannerComponent,
+    CurrentWeatherBannerComponent
   ],
   imports: [
     BrowserModule,

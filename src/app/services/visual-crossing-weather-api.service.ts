@@ -16,7 +16,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   public getWeather(city: string, day: Date): Observable<Weather[]> {
     const isoDate = day.toISOString().slice(0, VisualCrossingWeatherApiService.ISO_TIME_PART_LENGTH);
     // TODO configure base url - https://juristr.com/blog/2016/11/configure-proxy-api-angular-cli/
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${isoDate}`
+    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${isoDate}`;
     const params = new HttpParams()
       .append('key', VisualCrossingWeatherApiService.API_KEY);
     return this.httpClient.get(url, { params })

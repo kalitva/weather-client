@@ -1,5 +1,5 @@
-import { WeatherBannerComponent } from "./weather-banner.component";
-import { Component, OnInit } from "@angular/core";
+import { WeatherBannerComponent } from './weather-banner.component';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-current-weather-banner[city]',
@@ -14,10 +14,10 @@ export class CurrentWeatherBannerComponent extends WeatherBannerComponent implem
   }
 
   override formattedTempValue(): string {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   override fromWhichHour(): number {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
