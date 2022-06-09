@@ -3,5 +3,5 @@ import { Weather } from '../model/weather';
 
 export abstract class WeatherApiService {
 
-  public abstract getWeather(city: string, day: Date): Observable<Weather[]>;
+  public abstract forecast(city: string): Observable<Map<string, Weather[]>>;
 }

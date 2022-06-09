@@ -8,7 +8,7 @@ export abstract class WeatherBannerComponent {
   constructor(protected apiService: WeatherApiService) {
   }
 
-	public abstract formattedTempValue(): string;
+  public abstract tempValue(): string;
 
-	public abstract fromWhichHour(): number;
+  public abstract fromWhichHour(): number;
 }

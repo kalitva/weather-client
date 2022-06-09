@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 export class DayWeatherBannerComponent extends WeatherBannerComponent {
   @Input() day: string;
 
-  public formattedTempValue(): string {
+  public tempValue(): string {
     throw new Error('Method not implemented.');
   }
 

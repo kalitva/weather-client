@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class CurrentWeatherBannerComponent extends WeatherBannerComponent implements OnInit {
 
   ngOnInit(): void {
-    this.apiService.getWeather(this.city, new Date)
+    this.apiService.forecast(this.city)
       .subscribe(r => console.dir(r));
   }
 
-  override formattedTempValue(): string {
+  override tempValue(): string {
     throw new Error('Method not implemented.');
   }
 
