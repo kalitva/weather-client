@@ -4,6 +4,9 @@ import { map, Observable } from 'rxjs';
 import { Weather } from '../model/weather';
 import { WeatherApiService } from './weather-api.service';
 
+/*
+ * resource: https://www.visualcrossing.com/
+ */
 @Injectable()
 export class VisualCrossingWeatherApiService implements WeatherApiService {
   private static readonly API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
@@ -11,9 +14,13 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public forecast(city: string): Observable<Map<string, Weather[]>> {
-    const params = { key: VisualCrossingWeatherApiService.API_KEY };
-    return this.httpClient.get(`/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`, { params })
+  forecast(city: string): Observable<Map<string, Weather[]>> {
+    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`;
+    const params = {
+      key: VisualCrossingWeatherApiService.API_KEY,
+      unitGroup: 'metric'
+    };
+    return this.httpClient.get(url, { params })
       .pipe(map(this.jsonToModel));
   }
 
