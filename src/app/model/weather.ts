@@ -1,5 +1,8 @@
+import { Decoration } from './decoration';
+
 export interface Weather {
   description: string;
+  decoration: Decoration;
   cloudCover: number;                        /*** percents ***/
   temp: number;                              /*** celsius ***/
   feelsLike: number;

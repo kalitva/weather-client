@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { Decoration } from '../model/decoration';
 import { Weather } from '../model/weather';
 import { WeatherApiService } from './weather-api.service';
 
@@ -26,8 +27,9 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
 
   private jsonToModel(data: any): Map<string, Weather[]> {
     return data.days.reduce((m: Map<string, Weather[]> , d: any ) => {
-      return m.set(d.datetime, d.hours.map((h: any) => ({
+      return m.set(d.datetime, d.hours.map((h: any): Weather => ({
         description: h.conditions,
+        decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon],
         cloudCover: h.cloudcover,
         temp: h.temp,
         feelsLike: h.feelslike,
@@ -36,8 +38,24 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
         pressure: h.pressure,
         precipeProbability: h.precipprob,
         precipeType: h.preciptype,
-        uvIndex: h.uvindex
+        uvIndex: h.uvindex,
+        windDirection: h.winddir
       })));
     }, new Map<string, Weather[]>());
   }
+
+  /*
+   * docs: https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/
+   */
+  private static readonly decorationAdapter: { [key: string]: Decoration } = {
+    snow: Decoration.SNOW,
+    rain: Decoration.RAIN,
+    fog: Decoration.FOG,
+    wind: Decoration.WIND,
+    cloudy: Decoration.CLOUDY,
+    'partly-cloudy-day': Decoration.PARTLY_CLOUDY,
+    'partly-cloudy-night': Decoration.PARTLY_CLOUDY,
+    'clear-day': Decoration.CLEAR,
+    'clear-night': Decoration.CLEAR
+  };
 }

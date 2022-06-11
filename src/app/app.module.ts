@@ -20,7 +20,6 @@ import { VisualCrossingWeatherApiService } from './services/visual-crossing-weat
     HttpClientModule
   ],
   providers: [
-    // TODO create and use cashed service instead
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService }
   ],
   bootstrap: [AppComponent]
