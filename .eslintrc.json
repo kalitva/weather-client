@@ -17,6 +17,7 @@
   ],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-empty-function": "warn",
     "object-shorthand": "warn",
     "template-curly-spacing": "warn",
     "space-before-blocks": "warn",
