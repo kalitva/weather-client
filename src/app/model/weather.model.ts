@@ -1,4 +1,4 @@
-import { Decoration } from './decoration';
+import { Decoration } from './decoration.enum';
 
 export interface Weather {
   description: string;

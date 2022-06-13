@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Decoration } from '../model/decoration';
-import { Weather } from '../model/weather';
+import { Decoration } from '../model/decoration.enum';
+import { Weather } from '../model/weather.model';
 import { WeatherApiService } from './weather-api.service';
 
 /*
