@@ -15,7 +15,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  forecast(city: string): Observable<Map<string, Weather[]>> {
+  forecast(city: string): Observable<Map<Date, Weather[]>> {
     const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`;
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
@@ -25,9 +25,9 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       .pipe(map(this.jsonToModel));
   }
 
-  private jsonToModel(data: any): Map<string, Weather[]> {
-    return data.days.reduce((m: Map<string, Weather[]> , d: any ) => {
-      return m.set(d.datetime, d.hours.map((h: any): Weather => ({
+  private jsonToModel(data: any): Map<Date, Weather[]> {
+    return data.days.reduce((m: Map<Date, Weather[]>, d: any) => {
+      return m.set(new Date(d.datetime), d.hours.map((h: any): Weather => ({
         description: h.conditions,
         decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon],
         cloudCover: h.cloudcover,
@@ -41,7 +41,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
         uvIndex: h.uvindex,
         windDirection: h.winddir
       })));
-    }, new Map<string, Weather[]>());
+    }, new Map());
   }
 
   /*
