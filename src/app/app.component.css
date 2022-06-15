@@ -1,0 +1,41 @@
+.bg-clear {
+  background-image: url(../assets/bg/clear.jpg);
+}
+
+.bg-rain {
+  background-image: url(../assets/bg/rain.jpg);
+}
+
+.bg-cloudy {
+  background-image: url(../assets/bg/cloudy.jpg);
+}
+
+.bg-partly-cloudy {
+  background-image: url(../assets/bg/partly-cloudy.jpg);
+}
+
+.bg-fog {
+  background-image: url(../assets/bg/fog.jpg);
+}
+
+.bg-wind {
+  background-image: url(../assets/bg/wind.jpg);
+}
+
+.bg-snow {
+  background-image: url(../assets/bg/snow.jpg);
+}
+
+.background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-size: 100% 100%;
+  filter: blur(10px);
+}
+
+.top-bar {
+  position: fixed;
+  z-index: 1;
+}

@@ -41,7 +41,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
         uvIndex: h.uvindex,
         windDirection: h.winddir
       })));
-    }, new Map<string, Weather[]>());
+    }, new Map());
   }
 
   /*
