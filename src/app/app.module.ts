@@ -18,7 +18,7 @@ import { CacheHttpInterceptor } from './interceptors/cache-http.interceptor';
   ],
   providers: [
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
-    { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
+//    { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
