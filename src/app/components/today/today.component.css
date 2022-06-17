@@ -1,0 +1,16 @@
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+}
+
+.location {
+  font-size: 2.4rem;
+  font-weight: var(--thin);
+}
+
+.time {
+  font-size: 1.5rem;
+  padding-top: 0.5rem;
+}
