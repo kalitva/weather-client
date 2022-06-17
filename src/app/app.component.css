@@ -26,7 +26,7 @@
   background-image: url(../assets/bg/snow.jpg);
 }
 
-#background-back {
+.background-back {
   position: fixed;
   left: 0;
   right: 0;
@@ -35,8 +35,9 @@
   filter: blur(50px);
 }
 
-#background-front {
+.background-front {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-size: 100% 100%;
 }
 
 .top-bar-gradient {
@@ -57,7 +58,6 @@
   width: var(--screen-width);
   height: 100%;
   margin: 0 auto;
-  background-size: 100% 100%;
 }
 
 .content {

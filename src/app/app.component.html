@@ -1,4 +1,9 @@
-<div id="background-back"></div>
-<div id="background-front" class="main-fraim"></div>
+<div [ngClass]="backgroundImageClass"  class="background-back"></div>
+<div [ngClass]="backgroundImageClass" class="background-front main-fraim"></div>
 <div class="top-bar-gradient"></div>
-<div class="content main-fraim">HELLO</div>
+<div class="content main-fraim">
+<!--
+  <app-top-bar [city]="city"></app-top-bar>
+-->
+  <h1>{{ city }}</h1>
+</div>
