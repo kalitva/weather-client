@@ -1,3 +1,11 @@
+.today-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), 10%, transparent, 75%, rgba(0, 0, 0, 0.8));
+}
+
 .top-bar {
   display: flex;
   align-items: center;
@@ -7,10 +15,31 @@
 
 .location {
   font-size: 2.4rem;
-  font-weight: var(--thin);
+  font-weight: var(--normal);
 }
 
 .time {
   font-size: 1.5rem;
   padding-top: 0.5rem;
+}
+
+.today-weather {
+  text-align: right;
+  padding: 2rem;
+}
+
+.description {
+  font-size: 1.3rem;
+  padding: 0.7rem 0;
+}
+
+.min-max-temp {
+  font-size: 2rem;
+}
+
+.temp {
+  display: flex;
+  justify-content: end;
+  font-size: 7rem;
+  font-weight: var(--bold);
 }

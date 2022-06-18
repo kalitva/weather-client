@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     const today = new Date;
     this.forecast = forecast;
     this.todayWeather = this.forecast.get(today.toISOString().slice(0, AppComponent.ISO_DATE_LENGTH)) || [];
+    // TODO replace cloudy image
     this.backgroundImageClass = `bg-${this.todayWeather[today.getHours()].decoration}`;
   };
 }
