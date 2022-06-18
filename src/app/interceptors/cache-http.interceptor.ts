@@ -22,6 +22,14 @@ export class CacheHttpInterceptor implements HttpInterceptor {
       return of(new HttpResponse(JSON.parse(cached)));
     }
     return next.handle(request)
-      .pipe(tap(event => event instanceof HttpResponse && localStorage.setItem(hash, JSON.stringify(event))));
+      .pipe(tap(event => event instanceof HttpResponse && this.setItem(hash, JSON.stringify(event))));
+  }
+
+  private setItem(key: string, value: string): void {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      localStorage.clear();
+    }
   }
 }
