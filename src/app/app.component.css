@@ -40,15 +40,16 @@
   background-size: 100% 100%;
 }
 
+/* TODO make the gradient more smooth */
 .top-bar-gradient {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 13rem;
+  height: 10rem;
   font-size: 2rem;
-  background-image: linear-gradient(rgba(0,0,0, 0.7), transparent);
+  background-color: rgba(0,0,0, 0.8);
 }
 
 .main-frame {
