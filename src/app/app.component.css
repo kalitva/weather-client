@@ -26,6 +26,34 @@
   background-image: url(../assets/bg/snow.jpg);
 }
 
+.visor-color-clear {
+  background-color: rgba(5,49,99, 0.5);
+}
+
+.visor-color-rain {
+  background-color: rgba(9,43,69, 0.3);
+}
+
+.visor-color-cloudy {
+  background-color: rgba(50,60,60, 0.2);
+}
+
+.visor-color-partly-cloudy {
+  background-color: rgba(20,60,80, 0.3);
+}
+
+.visor-color-fog {
+  background-color: rgba(0,0,0, 0.3);
+}
+
+.visor-color-wind {
+  background-color: rgba(12,67,19, 0.3);
+}
+
+.visor-color-snow {
+  background-color: rgba(0,0,0, 0.5);
+}
+
 .background-back {
   position: fixed;
   left: 0;
@@ -40,8 +68,7 @@
   background-size: 100% 100%;
 }
 
-/* TODO make the gradient more smooth */
-.top-bar-gradient {
+.top-visor {
   position: fixed;
   top: 0;
   left: 0;
@@ -49,7 +76,6 @@
   width: 100%;
   height: 10rem;
   font-size: 2rem;
-  background-color: rgba(0,0,0, 0.8);
 }
 
 .main-frame {

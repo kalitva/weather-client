@@ -14,9 +14,9 @@ export class AppComponent implements OnInit {
 
   city: string;
   forecast: Map<string, Weather[]>;
-  // TODO extract to method?
   todayWeather: Weather[];
   backgroundImageClass: string;
+  visorColorClass: string;
 
   constructor (private apiService: WeatherApiService, private locationService: GeoLocationService) {
   }
@@ -31,8 +31,10 @@ export class AppComponent implements OnInit {
   private updateView = (forecast: Map<string, Weather[]>): void => {
     const today = new Date;
     this.forecast = forecast;
+    // TODO error with wrong date
     this.todayWeather = this.forecast.get(today.toISOString().slice(0, AppComponent.ISO_DATE_LENGTH)) || [];
-    // TODO replace cloudy image
-    this.backgroundImageClass = `bg-${this.todayWeather[today.getHours()].decoration}`;
+    const decoration = this.todayWeather[today.getHours()].decoration;
+    this.backgroundImageClass = `bg-${decoration}`;
+    this.visorColorClass = `visor-color-${decoration}`;
   };
 }
