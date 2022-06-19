@@ -16,6 +16,7 @@ export class TodayComponent implements OnInit, AfterContentChecked {
   temp: Temperature;
   hours: number;
   iconSrc: string;
+  description: string;
 
   ngOnInit(): void {
     const time = (): void => {
@@ -31,6 +32,7 @@ export class TodayComponent implements OnInit, AfterContentChecked {
     }
     this.hours = new Date().getHours();
     this.iconSrc = `../../../assets/icons/${this.weather[this.hours].decoration}.svg`;
+    this.description = this.weather[this.hours].description;
     this.temp = {
       min: Math.min(...this.weather.map(w => w.temp)),
       max: Math.max(...this.weather.map(w => w.temp)),

@@ -11,11 +11,11 @@
     </h2>
   </header>
   <section class="today-weather">
-    <p class="description">{{ weather[hours]?.description }}</p>
+    <p class="description">{{ description }}</p>
     <div class="min-max-temp">
-      <span>&#8595; {{ temp?.min }}°</span>
+      <span>↓ {{ temp?.min }}°</span>
         &nbsp;
-      <span>&#8593; {{ temp?.max }}°</span>
+      <span>↑ {{ temp?.max }}°</span>
     </div>
     <div class="temp">
       <img [src]="iconSrc">
