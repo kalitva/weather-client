@@ -14,7 +14,6 @@ export class TodayComponent implements OnInit, AfterContentChecked {
 
   time: string;
   temp: Temperature;
-  hours: number;
   iconSrc: string;
   description: string;
 
@@ -30,13 +29,13 @@ export class TodayComponent implements OnInit, AfterContentChecked {
     if (!this.weather) {
       return;
     }
-    this.hours = new Date().getHours();
-    this.iconSrc = `../../../assets/icons/${this.weather[this.hours].decoration}.svg`;
-    this.description = this.weather[this.hours].description;
+    const hours = new Date().getHours();
+    this.iconSrc = `../../../assets/icons/${this.weather[hours].decoration}.svg`;
+    this.description = this.weather[hours].description;
     this.temp = {
       min: Math.min(...this.weather.map(w => w.temp)),
       max: Math.max(...this.weather.map(w => w.temp)),
-      current: this.weather[this.hours].temp
+      current: this.weather[hours].temp
     };
   }
 }

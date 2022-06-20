@@ -1,14 +1,18 @@
 <div class="today-frame">
-  <header class="top-bar">
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-        <path fill="#fff" d="m14.92 22.84-5.639-8.121L1.16 9.08l21.5-7.741zM5.485 9.648l5.234 3.633 3.633 5.234 4.987-13.854z"/>
-      </svg>
+  <header>
+    <div class="top-bar-fixed">
+      <div class="top-bar">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <path fill="#fff" d="m14.92 22.84-5.639-8.121L1.16 9.08l21.5-7.741zM5.485 9.648l5.234 3.633 3.633 5.234 4.987-13.854z"/>
+          </svg>
+        </div>
+        <h2 class="location">
+          <p>{{ city }}</p>
+          <p class="time">{{ time }}</p>
+        </h2>
+      </div>
     </div>
-    <h2 class="location">
-      <p>{{ city }}</p>
-      <p class="time">{{ time }}</p>
-    </h2>
   </header>
   <section class="today-weather">
     <p class="description">{{ description }}</p>

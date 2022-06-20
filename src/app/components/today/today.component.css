@@ -13,6 +13,10 @@
   padding: 2rem 1rem;
 }
 
+.top-bar-fixed {
+  position: fixed;
+}
+
 .location {
   font-size: 2.4rem;
   font-weight: var(--normal);
@@ -39,7 +43,7 @@
 
 .temp {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 7rem;
   font-weight: var(--bold);
 }
