@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { CurrentConditions } from '../model/current-conditions.model';
 import { Decoration } from '../model/decoration.enum';
-import { Weather } from '../model/weather.model';
 import { WeatherApiService } from './weather-api.service';
 
 /*
@@ -15,33 +15,27 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  forecast(city: string): Observable<Map<string, Weather[]>> {
-    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`;
+  currentConditions(city: string): Observable<CurrentConditions> {
+    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/today`;
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
       unitGroup: 'metric'
     };
     return this.httpClient.get(url, { params })
-      .pipe(map(this.jsonToModel));
+      .pipe(map(this.jsonToCurrentConditions));
   }
 
-  private jsonToModel(data: any): Map<string, Weather[]> {
-    return data.days.reduce((m: Map<string, Weather[]> , d: any ) => {
-      return m.set(d.datetime, d.hours.map((h: any): Weather => ({
-        description: h.conditions,
-        decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon],
-        cloudCover: h.cloudcover,
+  private jsonToCurrentConditions(data: any): CurrentConditions {
+    const today = data.days[0];
+    return {
+      city: data.address,
+      description: today.description,
+      decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
+      hours: today.hours.map((h: any) => ({
         temp: h.temp,
-        feelsLike: h.feelslike,
-        windSpeed: h.windspeed,
-        humidity: h.humidity,
-        pressure: h.pressure,
-        precipeProbability: h.precipprob,
-        precipeType: h.preciptype,
-        uvIndex: h.uvindex,
-        windDirection: h.winddir
-      })));
-    }, new Map());
+        decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon]
+      }))
+    };
   }
 
   /*

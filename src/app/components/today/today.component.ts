@@ -1,21 +1,20 @@
 import { formatDate } from '@angular/common';
 import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
+import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { Temperature } from 'src/app/model/temperature.model';
-import { Weather } from 'src/app/model/weather.model';
 
 @Component({
-  selector: 'app-today[city][weather]',
+  selector: 'app-today[city][currentConditions]',
   templateUrl: './today.component.html',
   styleUrls: ['./today.component.css']
 })
 export class TodayComponent implements OnInit, AfterContentChecked {
   @Input() city: string;
-  @Input() weather: Weather[];
+  @Input() currentConditions: CurrentConditions;
 
   time: string;
   temp: Temperature;
   iconSrc: string;
-  description: string;
 
   ngOnInit(): void {
     const time = (): void => {
@@ -26,16 +25,15 @@ export class TodayComponent implements OnInit, AfterContentChecked {
   }
 
   ngAfterContentChecked(): void {
-    if (!this.weather) {
+    if (!this.currentConditions) {
       return;
     }
     const hours = new Date().getHours();
-    this.iconSrc = `../../../assets/icons/${this.weather[hours].decoration}.svg`;
-    this.description = this.weather[hours].description;
+    this.iconSrc = `../../../assets/icons/${this.currentConditions.decoration}.svg`;
     this.temp = {
-      min: Math.min(...this.weather.map(w => w.temp)),
-      max: Math.max(...this.weather.map(w => w.temp)),
-      current: this.weather[hours].temp
+      min: Math.min(...this.currentConditions.hours.map(w => w.temp)),
+      max: Math.max(...this.currentConditions.hours.map(w => w.temp)),
+      current: this.currentConditions.hours[hours].temp
     };
   }
 }

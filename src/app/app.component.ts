@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mergeMap } from 'rxjs';
-import { Weather } from './model/weather.model';
+import { CurrentConditions } from './model/current-conditions.model';
 import { GeoLocationService } from './services/geo-location.service';
 import { WeatherApiService } from './services/weather-api.service';
 
@@ -10,11 +10,8 @@ import { WeatherApiService } from './services/weather-api.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  private static readonly ISO_DATE_LENGTH = 10;
-
   city: string;
-  forecast: Map<string, Weather[]>;
-  todayWeather: Weather[];
+  currentConditions: CurrentConditions;
   backgroundImageClass: string;
   visorColorClass: string;
 
@@ -24,17 +21,14 @@ export class AppComponent implements OnInit {
   // TODO handle errors for calls to services
   ngOnInit(): void {
     this.locationService.detectCity()
-      .pipe(mergeMap(c => this.apiService.forecast(this.city = c)))
+      .pipe(mergeMap(c => this.apiService.currentConditions(this.city = c)))
       .subscribe(this.updateView);
   }
 
-  private updateView = (forecast: Map<string, Weather[]>): void => {
-    const today = new Date;
-    this.forecast = forecast;
-    // TODO error with wrong date
-    this.todayWeather = this.forecast.get(today.toISOString().slice(0, AppComponent.ISO_DATE_LENGTH)) || [];
-    const decoration = this.todayWeather[today.getHours()].decoration;
-    this.backgroundImageClass = `bg-${decoration}`;
-    this.visorColorClass = `visor-color-${decoration}`;
+  private updateView = (currentConditions: CurrentConditions): void => {
+    this.currentConditions = currentConditions;
+    // TODO cut images at the bottom
+    this.backgroundImageClass = `bg-${currentConditions.decoration}`;
+    this.visorColorClass = `visor-color-${currentConditions.decoration}`;
   };
 }
