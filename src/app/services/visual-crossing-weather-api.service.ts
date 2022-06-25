@@ -28,7 +28,6 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   private jsonToCurrentConditions(data: any): CurrentConditions {
     const today = data.days[0];
     return {
-      city: data.address,
       description: today.description,
       decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
       hours: today.hours.map((h: any) => ({

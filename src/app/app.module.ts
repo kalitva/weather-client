@@ -7,6 +7,8 @@ import { WeatherApiService } from './services/weather-api.service';
 import { VisualCrossingWeatherApiService } from './services/visual-crossing-weather-api.service';
 import { CacheHttpInterceptor } from './interceptors/cache-http.interceptor';
 import { TodayComponent } from './components/today/today.component';
+import { GeoLocationService } from './services/geo-location.service';
+import { TrueWayGeoLocationService } from './services/true-way-geo-location.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { TodayComponent } from './components/today/today.component';
   ],
   providers: [
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
+    { provide: GeoLocationService, useClass: TrueWayGeoLocationService },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
