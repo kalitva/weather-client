@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mergeMap } from 'rxjs';
 import { CurrentConditions } from './model/current-conditions.model';
-import { GeoLocationService } from './services/geo-location.service';
+import { GeolocationService } from './services/geolocation.service';
 import { WeatherApiService } from './services/weather-api.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   backgroundImageClass: string;
   visorColorClass: string;
 
-  constructor (private apiService: WeatherApiService, private locationService: GeoLocationService) {
+  constructor (private apiService: WeatherApiService, private locationService: GeolocationService) {
   }
 
   // TODO handle errors for calls to services

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export abstract class GeoLocationService {
+export abstract class GeolocationService {
 
   abstract detectCity(): Observable<string>;
 }

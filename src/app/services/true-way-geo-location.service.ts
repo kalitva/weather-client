@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from, map, mergeMap } from 'rxjs';
-import { GeoLocationService } from './geo-location.service';
+import { GeolocationService } from './geolocation.service';
 
 /*
  * docs: https://rapidapi.com/trueway/api/trueway-geocoding/
  */
 @Injectable()
-export class TrueWayGeoLocationService implements GeoLocationService {
+export class TrueWayGeolocationService implements GeolocationService {
   constructor(private httpClient: HttpClient) {
   }
 
