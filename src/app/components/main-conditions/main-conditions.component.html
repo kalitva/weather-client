@@ -1,0 +1,12 @@
+<section class="today-weather">
+  <div class="min-max-temp">
+    <span>↓ {{ temp?.min }}°</span>
+      &nbsp;
+    <span>↑ {{ temp?.max }}°</span>
+  </div>
+  <div class="temp">
+    <img [src]="iconSrc">
+    <span>{{ temp?.current }}°</span>
+  </div>
+  <p class="description">{{ currentConditions?.description }}</p>
+</section>

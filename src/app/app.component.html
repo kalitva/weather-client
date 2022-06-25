@@ -2,7 +2,10 @@
 <div [ngClass]="backgroundImageClass" class="background-front main-frame"></div>
 <div [ngClass]="visorColorClass" class="top-visor"></div>
 <div class="content main-frame">
-  <app-today [city]="city" [currentConditions]="currentConditions"></app-today>
+  <div class="today-frame">
+    <app-top-bar [city]="city"></app-top-bar>
+    <app-main-conditions [currentConditions]="currentConditions"></app-main-conditions>
+  </div>
   <h1>HELLO</h1>
   <h1>HELLO</h1>
   <h1>HELLO</h1>

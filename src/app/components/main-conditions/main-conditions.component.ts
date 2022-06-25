@@ -3,12 +3,11 @@ import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { Temperature } from 'src/app/model/temperature.model';
 
 @Component({
-  selector: 'app-today[city][currentConditions]',
-  templateUrl: './today.component.html',
-  styleUrls: ['./today.component.css']
+  selector: 'app-main-conditions[currentConditions]',
+  templateUrl: './main-conditions.component.html',
+  styleUrls: ['./main-conditions.component.css']
 })
-export class TodayComponent implements AfterContentChecked {
-  @Input() city: string;
+export class MainConditionsComponent implements AfterContentChecked {
   @Input() currentConditions: CurrentConditions;
 
   temp: Temperature;

@@ -6,16 +6,16 @@ import { AppComponent } from './app.component';
 import { WeatherApiService } from './services/weather-api.service';
 import { VisualCrossingWeatherApiService } from './services/visual-crossing-weather-api.service';
 import { CacheHttpInterceptor } from './interceptors/cache-http.interceptor';
-import { TodayComponent } from './components/today/today.component';
 import { GeolocationService } from './services/geolocation.service';
 import { TrueWayGeolocationService } from './services/true-way-geo-location.service';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { MainConditionsComponent } from './components/main-conditions/main-conditions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodayComponent,
     TopBarComponent,
+    MainConditionsComponent,
   ],
   imports: [
     BrowserModule,
