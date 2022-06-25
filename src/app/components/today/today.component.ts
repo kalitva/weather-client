@@ -1,5 +1,4 @@
-import { formatDate } from '@angular/common';
-import { AfterContentChecked, Component, Input, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, Input } from '@angular/core';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { Temperature } from 'src/app/model/temperature.model';
 
@@ -8,21 +7,12 @@ import { Temperature } from 'src/app/model/temperature.model';
   templateUrl: './today.component.html',
   styleUrls: ['./today.component.css']
 })
-export class TodayComponent implements OnInit, AfterContentChecked {
+export class TodayComponent implements AfterContentChecked {
   @Input() city: string;
   @Input() currentConditions: CurrentConditions;
 
-  time: string;
   temp: Temperature;
   iconSrc: string;
-
-  ngOnInit(): void {
-    const time = (): void => {
-      this.time = formatDate(new Date, 'HH : mm cccc', 'en-US');
-    };
-    time();
-    setInterval(time, 10_000);
-  }
 
   ngAfterContentChecked(): void {
     if (!this.currentConditions) {

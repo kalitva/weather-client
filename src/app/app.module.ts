@@ -9,11 +9,13 @@ import { CacheHttpInterceptor } from './interceptors/cache-http.interceptor';
 import { TodayComponent } from './components/today/today.component';
 import { GeolocationService } from './services/geolocation.service';
 import { TrueWayGeolocationService } from './services/true-way-geo-location.service';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodayComponent,
+    TopBarComponent,
   ],
   imports: [
     BrowserModule,
