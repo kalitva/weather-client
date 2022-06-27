@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
 import { Decoration } from '../model/decoration.enum';
+import { Hour } from '../model/hour.model';
 import { WeatherApiService } from './weather-api.service';
 
 /*
@@ -30,7 +31,8 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return {
       description: today.description,
       decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
-      hours: today.hours.map((h: any) => ({
+      hours: today.hours.map((h: any): Hour => ({
+        time: h.datetime.slice(0, -3),
         temp: h.temp,
         decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon]
       }))

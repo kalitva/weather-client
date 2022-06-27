@@ -13,7 +13,7 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     const time = (): void => {
-      this.time = formatDate(new Date, 'HH : mm cccc', 'en-US');
+      this.time = formatDate(new Date, 'HH:mm cccc', 'en-US');
     };
     time();
     setInterval(time, 10_000);

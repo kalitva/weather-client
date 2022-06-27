@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { mergeMap } from 'rxjs';
 import { CurrentConditions } from './model/current-conditions.model';
+import { Hour } from './model/hour.model';
 import { GeolocationService } from './services/geolocation.service';
 import { WeatherApiService } from './services/weather-api.service';
 
@@ -12,6 +13,7 @@ import { WeatherApiService } from './services/weather-api.service';
 export class AppComponent implements OnInit {
   city: string;
   currentConditions: CurrentConditions;
+  hours: Hour[];
   backgroundImageClass: string;
   visorColorClass: string;
 
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit {
 
   private updateView = (currentConditions: CurrentConditions): void => {
     this.currentConditions = currentConditions;
+    this.hours = currentConditions.hours;
     // TODO cut images at the bottom
     this.backgroundImageClass = `bg-${currentConditions.decoration}`;
     this.visorColorClass = `visor-color-${currentConditions.decoration}`;
