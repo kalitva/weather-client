@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
-import { Decoration } from '../model/decoration.enum';
 import { Hour } from '../model/hour.model';
 import { WeatherApiService } from './weather-api.service';
 
 /*
  * resource: https://www.visualcrossing.com/
+ * timeline api: https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/
+ * icon set: https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/
  */
 @Injectable()
 export class VisualCrossingWeatherApiService implements WeatherApiService {
@@ -45,7 +46,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       maxTemp: today.tempmax,
       minTemp: today.tempmin,
       description: today.description,
-      decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
+      decoration: today.icon,
     };
   }
 
@@ -54,22 +55,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       .map((h: any): Hour => ({
         time: h.datetime.slice(0, -3),
         temp: h.temp,
-        decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon]
+        decoration: h.icon
       }));
   }
-
-  /*
-   * docs: https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/
-   */
-  private static readonly decorationAdapter: { [key: string]: Decoration } = {
-    snow: Decoration.SNOW,
-    rain: Decoration.RAIN,
-    fog: Decoration.FOG,
-    wind: Decoration.WIND,
-    cloudy: Decoration.CLOUDY,
-    'partly-cloudy-day': Decoration.PARTLY_CLOUDY,
-    'partly-cloudy-night': Decoration.PARTLY_CLOUDY,
-    'clear-day': Decoration.CLEAR,
-    'clear-night': Decoration.CLEAR
-  };
 }

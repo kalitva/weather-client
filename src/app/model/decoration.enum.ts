@@ -1,8 +1,10 @@
 export enum Decoration {
-  CLEAR = 'clear',
+  CLEAR_DAY = 'clear-day',
+  CLEAR_NIGHT = 'clear-night',
+  PARTLY_CLOUDY_DAY = 'partly-cloudy-day',
+  PARTLY_CLOUDY_NIGHT = 'partly-cloudy-night',
   RAIN = 'rain',
   CLOUDY = 'cloudy',
-  PARTLY_CLOUDY = 'partly-cloudy',
   FOG = 'fog',
   WIND = 'wind',
   SNOW = 'snow'
