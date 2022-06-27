@@ -10,8 +10,9 @@ import { WeatherApiService } from 'src/app/services/weather-api.service';
   styleUrls: ['./hours.component.css']
 })
 export class HoursComponent implements OnInit, AfterViewChecked {
-  private static readonly HOUR_CONTAINER_WIDTH = 110;
+  private static readonly HOUR_CONTAINER_WIDTH = 100 + 6;
 
+  // TODO try to implement draggable scroll
   @ViewChild('slider') slider: ElementRef;
 
   hours: Hour[];
@@ -30,7 +31,7 @@ export class HoursComponent implements OnInit, AfterViewChecked {
       return;
     }
     const paneToScroll = new Date().getHours() + 1;
-    this.slider.nativeElement.scrollLeft = paneToScroll * HoursComponent.HOUR_CONTAINER_WIDTH;
+    this.slider.nativeElement.scrollLeft = paneToScroll * HoursComponent.HOUR_CONTAINER_WIDTH - 3;
   }
 
   iconSrc(hour: Hour): string {
