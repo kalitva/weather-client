@@ -3,18 +3,18 @@
   padding: 2rem;
 }
 
-.description {
-  font-size: 1.3rem;
-  padding: 0.7rem 0;
-}
-
-.min-max-temp {
+.today-weather .min-max-temp {
   font-size: 2rem;
 }
 
-.temp {
+.today-weather .temp {
   display: flex;
   justify-content: flex-end;
   font-size: 7rem;
   font-weight: var(--bold);
+}
+
+.today-weather .description {
+  font-size: 1.3rem;
+  padding: 0.7rem 0;
 }
