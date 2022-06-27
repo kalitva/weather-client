@@ -29,7 +29,6 @@ export class AppComponent implements OnInit {
 
   private updateView = (currentConditions: CurrentConditions): void => {
     this.currentConditions = currentConditions;
-    this.hours = currentConditions.hours;
     // TODO cut images at the bottom
     this.backgroundImageClass = `bg-${currentConditions.decoration}`;
     this.visorColorClass = `visor-color-${currentConditions.decoration}`;

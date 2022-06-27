@@ -1,9 +1,9 @@
 import { Decoration } from './decoration.enum';
-import { Hour } from './hour.model';
 
 export interface CurrentConditions {
+  temp: number;
+  maxTemp: number;
+  minTemp: number;
   description: string;
   decoration: Decoration;
-
-  hours: Hour[];
 }

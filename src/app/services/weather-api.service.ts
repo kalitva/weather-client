@@ -1,9 +1,10 @@
 import { Observable } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
+import { Hour } from '../model/hour.model';
 
 export abstract class WeatherApiService {
 
-//  public abstract forecast(city: string): Observable<Map<string, Weather[]>>;
+  abstract hoursForecast(city: string): Observable<Hour[]>;
 
   abstract currentConditions(city: string): Observable<CurrentConditions>;
 }

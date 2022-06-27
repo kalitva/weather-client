@@ -20,23 +20,42 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/today`;
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
-      unitGroup: 'metric'
+      unitGroup: 'metric',
+      include: 'days'
     };
     return this.httpClient.get(url, { params })
       .pipe(map(this.jsonToCurrentConditions));
   }
 
+  hoursForecast(city: string): Observable<Hour[]> {
+    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`
+    const params = {
+      key: VisualCrossingWeatherApiService.API_KEY,
+      unitGroup: 'metric',
+      include: 'hours'
+    };
+    return this.httpClient.get(url, { params })
+      .pipe(map(this.jsonToHoursForecast));
+  }
+
   private jsonToCurrentConditions(data: any): CurrentConditions {
     const today = data.days[0];
     return {
+      temp: today.temp,
+      maxTemp: today.tempmax,
+      minTemp: today.tempmin,
       description: today.description,
       decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
-      hours: today.hours.map((h: any): Hour => ({
+    };
+  }
+
+  private jsonToHoursForecast(data: any): Hour[] {
+    return data.days.flatMap((d: any) => d.hours)
+      .map((h: any): Hour => ({
         time: h.datetime.slice(0, -3),
         temp: h.temp,
         decoration: VisualCrossingWeatherApiService.decorationAdapter[h.icon]
-      }))
-    };
+      }));
   }
 
   /*
