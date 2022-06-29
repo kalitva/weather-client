@@ -12,6 +12,7 @@ export class TopBarComponent implements OnInit {
   time: string;
 
   ngOnInit(): void {
+    // TODO in different cities show time according time zone
     this.time = formatDate(new Date, 'HH:mm cccc', 'en-US');
   }
 }

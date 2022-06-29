@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mergeMap } from 'rxjs';
 import { CurrentConditions } from './model/current-conditions.model';
-import { Hour } from './model/hour.model';
 import { GeolocationService } from './services/geolocation.service';
 import { WeatherApiService } from './services/weather-api.service';
 
@@ -13,7 +12,6 @@ import { WeatherApiService } from './services/weather-api.service';
 export class AppComponent implements OnInit {
   city: string;
   currentConditions: CurrentConditions;
-  hours: Hour[];
   backgroundImageClass: string;
   visorColorClass: string;
 
@@ -22,6 +20,7 @@ export class AppComponent implements OnInit {
 
   // TODO handle errors for calls to services
   ngOnInit(): void {
+    // TODO doesn't work when browser asks to allow getting location
     this.locationService.detectCity()
       .pipe(mergeMap(c => this.apiService.currentConditions(this.city = c)))
       .subscribe(this.updateView);
