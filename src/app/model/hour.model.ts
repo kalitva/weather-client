@@ -1,7 +1,7 @@
-import { Decoration } from './decoration.enum';
+import { Icon } from './icon.enum';
 
 export interface Hour {
   time: string;
   temp: number;
-  decoration: Decoration;
+  icon: Icon;
 }

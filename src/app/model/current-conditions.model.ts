@@ -1,4 +1,5 @@
 import { Decoration } from './decoration.enum';
+import { Icon } from './icon.enum';
 
 export interface CurrentConditions {
   temp: number;
@@ -6,4 +7,5 @@ export interface CurrentConditions {
   minTemp: number;
   description: string;
   decoration: Decoration;
+  icon: Icon;
 }
