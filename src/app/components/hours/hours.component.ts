@@ -35,6 +35,6 @@ export class HoursComponent implements OnInit, AfterViewChecked {
   }
 
   iconSrc(hour: Hour): string {
-    return `../../../assets/icons/${hour.icon}.svg`;
+    return `assets/icons/${hour.icon}.svg`;
   }
 }

@@ -15,6 +15,6 @@ export class MainConditionsComponent implements AfterContentChecked {
     if (!this.currentConditions) {
       return;
     }
-    this.iconSrc = `../../../assets/icons/${this.currentConditions.icon}.svg`;
+    this.iconSrc = `assets/icons/${this.currentConditions.icon}.svg`;
   }
 }

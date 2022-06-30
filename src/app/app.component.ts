@@ -12,7 +12,7 @@ import { WeatherApiService } from './services/weather-api.service';
 export class AppComponent implements OnInit {
   city: string;
   currentConditions: CurrentConditions;
-  backgroundImageClass: string;
+  backgroundImagePath: string;
   visorColorClass: string;
 
   constructor (private apiService: WeatherApiService, private locationService: GeolocationService) {
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   private updateView = (currentConditions: CurrentConditions): void => {
     this.currentConditions = currentConditions;
     // TODO cut images at the bottom
-    this.backgroundImageClass = `bg-${currentConditions.decoration}`;
+    this.backgroundImagePath = `url(assets/bg/day/${currentConditions.decoration}.jpg)`;
     this.visorColorClass = `visor-color-${currentConditions.decoration}`;
   };
 }

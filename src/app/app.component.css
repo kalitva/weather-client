@@ -1,31 +1,3 @@
-.bg-clear {
-  background-image: url(../assets/bg/clear.jpg);
-}
-
-.bg-rain {
-  background-image: url(../assets/bg/rain.jpg);
-}
-
-.bg-cloudy {
-  background-image: url(../assets/bg/cloudy.jpg);
-}
-
-.bg-partly-cloudy {
-  background-image: url(../assets/bg/partly-cloudy.jpg);
-}
-
-.bg-fog {
-  background-image: url(../assets/bg/fog.jpg);
-}
-
-.bg-wind {
-  background-image: url(../assets/bg/wind.jpg);
-}
-
-.bg-snow {
-  background-image: url(../assets/bg/snow.jpg);
-}
-
 .visor-color-clear {
   background-color: rgba(5,49,99, 0.5);
 }
