@@ -22,7 +22,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
       unitGroup: 'metric',
-      include: 'days'
+      include: 'current'
     };
     return this.httpClient.get(url, { params })
       .pipe(map(this.jsonToCurrentConditions));
@@ -42,12 +42,12 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   private jsonToCurrentConditions(data: any): CurrentConditions {
     const today = data.days[0];
     return {
-      temp: today.temp,
+      temp: data.currentConditions.temp,
       maxTemp: today.tempmax,
       minTemp: today.tempmin,
       description: today.description,
       decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
-      icon: today.icon
+      icon: data.currentConditions.icon
     };
   }
 
