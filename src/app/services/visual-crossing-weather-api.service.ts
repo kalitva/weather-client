@@ -46,7 +46,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       maxTemp: today.tempmax,
       minTemp: today.tempmin,
       description: today.description,
-      decoration: VisualCrossingWeatherApiService.decorationAdapter[today.icon],
+      decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
       icon: data.currentConditions.icon
     };
   }
@@ -69,8 +69,8 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     fog: Decoration.FOG,
     wind: Decoration.WIND,
     cloudy: Decoration.CLOUDY,
-    'partly-cloudy-day': Decoration.PARTLY_CLOUDY,
-    'partly-cloudy-night': Decoration.PARTLY_CLOUDY,
+    'partly-cloudy-day': Decoration.CLOUDY,
+    'partly-cloudy-night': Decoration.CLOUDY,
     'clear-day': Decoration.CLEAR,
     'clear-night': Decoration.CLEAR
   };
