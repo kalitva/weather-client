@@ -31,7 +31,7 @@ export class HoursComponent implements OnInit, AfterViewChecked {
       return;
     }
     const paneToScroll = new Date().getHours() + 1;
-    this.slider.nativeElement.scrollLeft = paneToScroll * HoursComponent.HOUR_CONTAINER_WIDTH - 3;
+    this.slider.nativeElement.scrollLeft = paneToScroll * HoursComponent.HOUR_CONTAINER_WIDTH;
   }
 
   iconSrc(hour: Hour): string {
