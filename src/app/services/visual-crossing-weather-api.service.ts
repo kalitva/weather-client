@@ -29,7 +29,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   }
 
   hoursForecast(city: string): Observable<Hour[]> {
-    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`
+    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`;
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
       unitGroup: 'metric',

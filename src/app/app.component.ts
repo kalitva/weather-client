@@ -3,6 +3,7 @@ import { mergeMap } from 'rxjs';
 import { CurrentConditions } from './model/current-conditions.model';
 import { GeolocationService } from './services/geolocation.service';
 import { WeatherApiService } from './services/weather-api.service';
+import { timeOfDay } from './util/timeOfDay';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
   private updateView = (currentConditions: CurrentConditions): void => {
     this.currentConditions = currentConditions;
     // TODO cut images at the bottom
-    this.backgroundImagePath = `url(assets/bg/day/${currentConditions.decoration}.jpg)`;
+    this.backgroundImagePath = `url(assets/bg/${timeOfDay()}/${currentConditions.decoration}.jpg)`;
     this.visorColorClass = `visor-color-${currentConditions.decoration}`;
   };
 }

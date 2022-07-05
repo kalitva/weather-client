@@ -6,6 +6,7 @@ import { CurrentConditions } from 'src/app/model/current-conditions.model';
   templateUrl: './main-conditions.component.html',
   styleUrls: ['./main-conditions.component.css']
 })
+// TODO rename to currentConditionsComponent
 export class MainConditionsComponent implements AfterContentChecked {
   @Input() currentConditions: CurrentConditions;
 
