@@ -79,3 +79,7 @@
 .content .forecast {
   background-color: var(--primary-background);
 }
+
+.forecast {
+  padding: 1rem 2rem;
+}

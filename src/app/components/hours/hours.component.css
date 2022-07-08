@@ -1,8 +1,4 @@
 .hours {
-  padding: 1rem 2rem;
-}
-
-.hours .slider {
   display: flex;
   column-gap: 0.6rem;
   overflow: auto;
@@ -11,11 +7,11 @@
   user-select: none;
 }
 
-.hours .slider::-webkit-scrollbar {
+.hours::-webkit-scrollbar {
   display: none;
 }
 
-.hours .slider .hour {
+.hours .hour {
   min-width: 10rem;
   min-height: 10rem;
   border-radius: 1rem;
@@ -23,20 +19,20 @@
   background-color: rgba(255,255,255,0.1);
 }
 
-.hours .slider .hour .icon {
+.hours .hour .icon {
   width: 6rem;
   margin: -1rem;
 }
 
-.hours .slider .hour .time,
-.hours .slider .hour .temp {
+.hours .hour .time,
+.hours .hour .temp {
   padding: 0.5rem 0;
 }
 
-.hours .slider .hour .time {
+.hours .hour .time {
   font-size: 1.2rem;
 }
 
-.hours .slider .hour .temp {
+.hours .hour .temp {
   font-size: 1.5rem;
 }
