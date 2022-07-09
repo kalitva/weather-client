@@ -1,0 +1,12 @@
+<ul class="days">
+  <li class="day" *ngFor="let day of days">
+    <div class="date">{{ formatDate(day.date) }}</div>
+    <div class="conditions">
+      <img class="icon" [src]="iconSrc(day.icon)" />
+      <div class="temp">
+        <p>↓{{ day.minTemp }}°</p>
+        <p>↑{{ day.maxTemp }}°</p>
+      </div>
+    </div>
+  </li>
+</ul>

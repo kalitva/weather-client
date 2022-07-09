@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
+import { Day } from '../model/day.model';
 import { Decoration } from '../model/decoration.enum';
 import { Hour } from '../model/hour.model';
 import { WeatherApiService } from './weather-api.service';
@@ -14,33 +15,48 @@ import { WeatherApiService } from './weather-api.service';
 export class VisualCrossingWeatherApiService implements WeatherApiService {
   private static readonly API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
 
+  private static readonly TODAY_INDEX = 0;
+  private static readonly NEXT_DAY_INDEX = 1;
+
   constructor(private httpClient: HttpClient) {
   }
 
   currentConditions(city: string): Observable<CurrentConditions> {
-    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/today`;
-    const params = {
-      key: VisualCrossingWeatherApiService.API_KEY,
-      unitGroup: 'metric',
-      include: 'current'
-    };
-    return this.httpClient.get(url, { params })
-      .pipe(map(this.jsonToCurrentConditions));
+    return this.doGet({
+      url: `/VisualCrossingWebServices/rest/services/timeline/${city}/today`,
+      include: 'current',
+      mapper: this.jsonToCurrentConditions
+    });
   }
 
   hoursForecast(city: string): Observable<Hour[]> {
-    const url = `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`;
+    return this.doGet({
+      url: `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`,
+      include: 'hours',
+      mapper: this.jsonToHoursForecast
+    });
+  }
+
+  next10DaysForecast(city: string): Observable<Day[]> {
+    return this.doGet({
+      url: `/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`,
+      include: 'days',
+      mapper: this.jsonToDaysForecast
+    });
+  }
+
+  private doGet<T>(options: { url: string, include: string, mapper: (data: any) => T }): Observable<T> {
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
       unitGroup: 'metric',
-      include: 'hours'
+      include: options.include
     };
-    return this.httpClient.get(url, { params })
-      .pipe(map(this.jsonToHoursForecast));
+    return this.httpClient.get(options.url, { params })
+      .pipe(map(options.mapper));
   }
 
   private jsonToCurrentConditions(data: any): CurrentConditions {
-    const today = data.days[0];
+    const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
     return {
       temp: data.currentConditions.temp,
       maxTemp: today.tempmax,
@@ -58,6 +74,16 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
         temp: h.temp,
         icon: h.icon
       }));
+  }
+
+  jsonToDaysForecast(data: any): Day[] {
+    const days = data.days.slice(VisualCrossingWeatherApiService.NEXT_DAY_INDEX);
+    return days.map((d: any): Day => ({
+      date: d.datetime,
+      icon: d.icon,
+      minTemp: d.tempmin,
+      maxTemp: d.tempmax
+    }));
   }
 
   /*

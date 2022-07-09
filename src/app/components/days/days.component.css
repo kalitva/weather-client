@@ -1,0 +1,36 @@
+.days {
+  margin-top: 2.5rem;
+  list-style-type: none;
+}
+
+.days .day {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px dotted rgba(255,255,255, 0.5);
+}
+
+.days .day .date {
+  font-size: 1.5rem;
+}
+
+.days .day .conditions {
+  display: flex;
+  justify-content: space-between;
+  width: 12rem;
+}
+
+.days .day .conditions .icon {
+  width: 5rem;
+}
+
+.days .day .conditions .temp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 5rem;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+}

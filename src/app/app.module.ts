@@ -11,6 +11,7 @@ import { TrueWayGeolocationService } from './services/true-way-geo-location.serv
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { MainConditionsComponent } from './components/main-conditions/main-conditions.component';
 import { HoursComponent } from './components/hours/hours.component';
+import { DaysComponent } from './components/days/days.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HoursComponent } from './components/hours/hours.component';
     TopBarComponent,
     MainConditionsComponent,
     HoursComponent,
+    DaysComponent,
   ],
   imports: [
     BrowserModule,
