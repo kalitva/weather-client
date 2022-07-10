@@ -1,5 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ObservableCity } from 'src/app/logic/observable-city';
 import { Day } from 'src/app/model/day.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
@@ -11,13 +12,13 @@ import { WeatherApiService } from 'src/app/services/weather-api.service';
 export class DaysComponent implements OnInit {
   days: Day[];
 
-  constructor(private weatherApi: WeatherApiService) {
+  constructor(private weatherApiService: WeatherApiService, private observableCity: ObservableCity) {
   }
 
   ngOnInit(): void {
-    // TODO city
-    this.weatherApi.next10DaysForecast('Rostov-on-Don')
-      .subscribe(days => this.days = days);
+    this.observableCity.onChanged(c => {
+      this.weatherApiService.next10DaysForecast(c).subscribe(days => this.days = days);
+    });
   }
 
   formatDate(date: string): string {

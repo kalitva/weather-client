@@ -3,7 +3,7 @@
 <div [ngClass]="visorColorClass" class="top-visor"></div>
 <div class="content main-frame">
   <div class="main-conditions">
-    <app-top-bar [city]="city"></app-top-bar>
+    <app-top-bar (cityChanged)="updateWeather($event)"></app-top-bar>
     <app-main-conditions [currentConditions]="currentConditions"></app-main-conditions>
   </div>
   <div class="forecast">

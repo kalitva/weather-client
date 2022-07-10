@@ -1,7 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { mergeMap } from 'rxjs';
+import { ObservableCity } from 'src/app/logic/observable-city';
 import { Hour } from 'src/app/model/hour.model';
-import { GeolocationService } from 'src/app/services/geolocation.service';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
 @Component({
@@ -17,15 +16,16 @@ export class HoursComponent implements OnInit, AfterViewChecked {
 
   hours: Hour[];
 
-  constructor(private locationService: GeolocationService, private apiService: WeatherApiService) {
+  constructor(private weatherApiService: WeatherApiService, private observableCity: ObservableCity) {
   }
 
   ngOnInit(): void {
-    this.locationService.detectCity()
-      .pipe(mergeMap(c => this.apiService.hoursForecast(c)))
-      .subscribe(hf => this.hours = hf);
+    this.observableCity.onChanged(c => {
+      this.weatherApiService.hoursForecast(c).subscribe(hf => this.hours = hf);
+    });
   }
 
+  // TODO try to move in on city changed
   ngAfterViewChecked(): void {
     if (!this.hours) {
       return;

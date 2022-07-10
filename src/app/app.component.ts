@@ -1,30 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { mergeMap } from 'rxjs';
+import { Component } from '@angular/core';
+import { timeOfDay } from './logic/util';
 import { CurrentConditions } from './model/current-conditions.model';
-import { GeolocationService } from './services/geolocation.service';
 import { WeatherApiService } from './services/weather-api.service';
-import { timeOfDay } from './util/timeOfDay';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   city: string;
   currentConditions: CurrentConditions;
   backgroundImagePath: string;
   visorColorClass: string;
 
-  constructor (private apiService: WeatherApiService, private locationService: GeolocationService) {
+  constructor (private weatherApiService: WeatherApiService) {
   }
 
-  // TODO handle errors for calls to services
-  ngOnInit(): void {
-    // TODO doesn't work when browser asks to allow getting location
-    this.locationService.detectCity()
-      .pipe(mergeMap(c => this.apiService.currentConditions(this.city = c)))
-      .subscribe(this.updateView);
+  updateWeather(city: string): void {
+    this.city = city;
+    // TODO handle errors
+    this.weatherApiService.currentConditions(city).subscribe(this.updateView);
   }
 
   private updateView = (currentConditions: CurrentConditions): void => {
@@ -33,4 +29,5 @@ export class AppComponent implements OnInit {
     this.backgroundImagePath = `url(assets/bg/${timeOfDay()}/${currentConditions.decoration}.jpg)`;
     this.visorColorClass = `visor-color-${currentConditions.decoration}`;
   };
+  // NOTE: it makes sense to emit conditions to set background instead of passing them to the child
 }
