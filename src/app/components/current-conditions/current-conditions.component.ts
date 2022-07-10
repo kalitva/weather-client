@@ -5,19 +5,18 @@ import { Decoration } from 'src/app/model/decoration.enum';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
 @Component({
-  selector: 'app-main-conditions',
-  templateUrl: './main-conditions.component.html',
-  styleUrls: ['./main-conditions.component.css']
+  selector: 'app-current-conditions',
+  templateUrl: './current-conditions.component.html',
+  styleUrls: ['./current-conditions.component.css']
 })
-// TODO rename to currentConditionsComponent
-export class MainConditionsComponent implements OnInit {
-  @Output() currentConditionsChanged: EventEmitter<Decoration>;
+export class CurrentConditionsComponent implements OnInit {
+  @Output() conditionsChanged: EventEmitter<Decoration>;
 
   currentConditions: CurrentConditions;
   iconSrc: string;
 
   constructor(private weatherApiService: WeatherApiService, private observableCity: ObservableCity) {
-    this.currentConditionsChanged = new EventEmitter();
+    this.conditionsChanged = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -25,7 +24,7 @@ export class MainConditionsComponent implements OnInit {
       this.weatherApiService.currentConditions(c).subscribe(cc => {
         this.currentConditions = cc;
         this.iconSrc = `assets/icons/${cc.icon}.svg`;
-        this.currentConditionsChanged.emit(cc.decoration);
+        this.conditionsChanged.emit(cc.decoration);
       });
     });
   }

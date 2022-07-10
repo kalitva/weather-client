@@ -4,7 +4,7 @@
 <div class="content main-frame">
   <div class="main-conditions">
     <app-top-bar></app-top-bar>
-    <app-main-conditions (currentConditionsChanged)="updateDecoration($event)"></app-main-conditions>
+    <app-current-conditions (conditionsChanged)="updateDecoration($event)"></app-current-conditions>
   </div>
   <div class="forecast">
     <h2 class="header">Forecast</h2>
