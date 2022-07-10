@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { timeOfDay } from './logic/util';
-import { CurrentConditions } from './model/current-conditions.model';
-import { WeatherApiService } from './services/weather-api.service';
+import { Decoration } from './model/decoration.enum';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +8,11 @@ import { WeatherApiService } from './services/weather-api.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  city: string;
-  currentConditions: CurrentConditions;
   backgroundImagePath: string;
   visorColorClass: string;
 
-  constructor (private weatherApiService: WeatherApiService) {
+  updateDecoration(decoration: Decoration): void {
+    this.backgroundImagePath = `url(assets/bg/${timeOfDay()}/${decoration}.jpg)`;
+    this.visorColorClass = `visor-color-${decoration}`;
   }
-
-  updateWeather(city: string): void {
-    this.city = city;
-    // TODO handle errors
-    this.weatherApiService.currentConditions(city).subscribe(this.updateView);
-  }
-
-  private updateView = (currentConditions: CurrentConditions): void => {
-    this.currentConditions = currentConditions;
-    // TODO cut images at the bottom
-    this.backgroundImagePath = `url(assets/bg/${timeOfDay()}/${currentConditions.decoration}.jpg)`;
-    this.visorColorClass = `visor-color-${currentConditions.decoration}`;
-  };
-  // NOTE: it makes sense to emit conditions to set background instead of passing them to the child
 }

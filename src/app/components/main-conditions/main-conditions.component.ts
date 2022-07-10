@@ -1,21 +1,32 @@
-import { AfterContentChecked, Component, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ObservableCity } from 'src/app/logic/observable-city';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
+import { Decoration } from 'src/app/model/decoration.enum';
+import { WeatherApiService } from 'src/app/services/weather-api.service';
 
 @Component({
-  selector: 'app-main-conditions[currentConditions]',
+  selector: 'app-main-conditions',
   templateUrl: './main-conditions.component.html',
   styleUrls: ['./main-conditions.component.css']
 })
 // TODO rename to currentConditionsComponent
-export class MainConditionsComponent implements AfterContentChecked {
-  @Input() currentConditions: CurrentConditions;
+export class MainConditionsComponent implements OnInit {
+  @Output() currentConditionsChanged: EventEmitter<Decoration>;
 
+  currentConditions: CurrentConditions;
   iconSrc: string;
 
-  ngAfterContentChecked(): void {
-    if (!this.currentConditions) {
-      return;
-    }
-    this.iconSrc = `assets/icons/${this.currentConditions.icon}.svg`;
+  constructor(private weatherApiService: WeatherApiService, private observableCity: ObservableCity) {
+    this.currentConditionsChanged = new EventEmitter();
+  }
+
+  ngOnInit(): void {
+    this.observableCity.onChanged(c => {
+      this.weatherApiService.currentConditions(c).subscribe(cc => {
+        this.currentConditions = cc;
+        this.iconSrc = `assets/icons/${cc.icon}.svg`;
+        this.currentConditionsChanged.emit(cc.decoration);
+      });
+    });
   }
 }

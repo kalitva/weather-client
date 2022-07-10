@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ObservableCity } from 'src/app/logic/observable-city';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 
@@ -9,13 +9,10 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-  @Output() cityChanged: EventEmitter<string>;
-
   city: string;
   time: string;
 
   constructor(private geolocationService: GeolocationService, private observableCity: ObservableCity) {
-    this.cityChanged = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -25,7 +22,6 @@ export class TopBarComponent implements OnInit {
     // TODO handle errors
     this.geolocationService.detectCity().subscribe(c => {
       this.city = c;
-      this.cityChanged.emit(c);
       this.observableCity.update(c);
     });
   }
