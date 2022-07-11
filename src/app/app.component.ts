@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { timeOfDayByOffset } from './logic/util';
+import { timeOfDayByOffset } from './util/datetime-util';
 import { CurrentConditions } from './model/current-conditions.model';
 
 @Component({

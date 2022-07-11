@@ -1,8 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ObservableCity } from 'src/app/logic/observable-city';
-import { ObservableTimezone } from 'src/app/logic/observable-timezone';
-import { datetimeByOffset } from 'src/app/logic/util';
+import { ObservableCity } from 'src/app/state/observable-city';
+import { ObservableTimezone } from 'src/app/state/observable-timezone';
+import { datetimeByOffset } from 'src/app/util/datetime-util';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 
 @Component({

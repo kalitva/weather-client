@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ObservableCity } from 'src/app/logic/observable-city';
+import { ObservableCity } from 'src/app/state/observable-city';
 import { Day } from 'src/app/model/day.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 

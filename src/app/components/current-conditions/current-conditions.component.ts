@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ObservableCity } from 'src/app/logic/observable-city';
-import { ObservableTimezone } from 'src/app/logic/observable-timezone';
+import { ObservableCity } from 'src/app/state/observable-city';
+import { ObservableTimezone } from 'src/app/state/observable-timezone';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
