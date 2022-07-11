@@ -1,5 +1,6 @@
 import { Decoration } from './decoration.enum';
 import { Icon } from './icon.enum';
+import { Timezone } from './timezone.model';
 
 export interface CurrentConditions {
   temp: number;
@@ -8,4 +9,5 @@ export interface CurrentConditions {
   description: string;
   decoration: Decoration;
   icon: Icon;
+  timezone: Timezone;
 }

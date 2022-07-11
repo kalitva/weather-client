@@ -63,7 +63,8 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       minTemp: today.tempmin,
       description: today.description,
       decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
-      icon: data.currentConditions.icon
+      icon: data.currentConditions.icon,
+      timezone: { timezone: data.timezone, offset: data.tzoffset },
     };
   }
 
@@ -76,7 +77,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       }));
   }
 
-  jsonToDaysForecast(data: any): Day[] {
+  private jsonToDaysForecast(data: any): Day[] {
     const days = data.days.slice(VisualCrossingWeatherApiService.NEXT_DAY_INDEX);
     return days.map((d: any): Day => ({
       date: d.datetime,

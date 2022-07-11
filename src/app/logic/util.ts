@@ -1,6 +1,5 @@
-export function timeOfDay(): string {
-  // TODO should take hours as a parameter the time of day to be computed according to a time zone
-  const hours = new Date().getHours();
+export function timeOfDayByOffset(offset: number): string {
+  const hours = datetimeByOffset(offset).getHours();
   if (hours >= 22 || hours >= 0 && hours < 7) {
     return 'night';
   }
@@ -14,4 +13,10 @@ export function timeOfDay(): string {
     return 'evening';
   }
   throw new Error('Should not be reached');
+}
+
+export function datetimeByOffset(offset: number): Date {
+  const date = new Date(new Date().toISOString().slice(0, -1));
+  date.setHours(date.getHours() + offset);
+  return date;
 }

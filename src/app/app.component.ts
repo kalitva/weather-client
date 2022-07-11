@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { timeOfDay } from './logic/util';
-import { Decoration } from './model/decoration.enum';
+import { timeOfDayByOffset } from './logic/util';
+import { CurrentConditions } from './model/current-conditions.model';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +11,9 @@ export class AppComponent {
   backgroundImagePath: string;
   visorColorClass: string;
 
-  updateDecoration(decoration: Decoration): void {
-    this.backgroundImagePath = `url(assets/bg/${timeOfDay()}/${decoration}.jpg)`;
-    this.visorColorClass = `visor-color-${decoration}`;
+  updateDecoration(currentConditions: CurrentConditions): void {
+    const timeOfDay = timeOfDayByOffset(currentConditions.timezone.offset);
+    this.backgroundImagePath = `url(assets/bg/${timeOfDay}/${currentConditions.decoration}.jpg)`;
+    this.visorColorClass = `visor-color-${currentConditions.decoration}`;
   }
 }

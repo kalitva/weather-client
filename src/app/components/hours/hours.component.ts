@@ -1,5 +1,7 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ObservableCity } from 'src/app/logic/observable-city';
+import { ObservableTimezone } from 'src/app/logic/observable-timezone';
+import { datetimeByOffset } from 'src/app/logic/util';
 import { Hour } from 'src/app/model/hour.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
@@ -16,12 +18,20 @@ export class HoursComponent implements OnInit, AfterViewChecked {
 
   hours: Hour[];
 
-  constructor(private weatherApiService: WeatherApiService, private observableCity: ObservableCity) {
+  private date: Date;
+
+  constructor(
+      private weatherApiService: WeatherApiService,
+      private observableCity: ObservableCity,
+      private observableTimezone: ObservableTimezone) {
   }
 
   ngOnInit(): void {
     this.observableCity.onChanged(c => {
       this.weatherApiService.hoursForecast(c).subscribe(hf => this.hours = hf);
+    });
+    this.observableTimezone.onChange(tz => {
+      this.date = datetimeByOffset(tz.offset);
     });
   }
 
@@ -29,7 +39,7 @@ export class HoursComponent implements OnInit, AfterViewChecked {
     if (!this.hours) {
       return;
     }
-    const paneToScroll = new Date().getHours() + 1;
+    const paneToScroll = this.date.getHours() + 1;
     this.slider.nativeElement.scrollLeft = paneToScroll * HoursComponent.HOUR_CONTAINER_WIDTH;
   }
 

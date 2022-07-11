@@ -1,6 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ObservableCity } from 'src/app/logic/observable-city';
+import { ObservableTimezone } from 'src/app/logic/observable-timezone';
+import { datetimeByOffset } from 'src/app/logic/util';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 
 @Component({
@@ -13,14 +15,18 @@ export class TopBarComponent implements OnInit {
   time: string;
   showForm: boolean;
 
-  constructor(private geolocationService: GeolocationService, private observableCity: ObservableCity) {
+  constructor(
+      private geolocationService: GeolocationService,
+      private observableCity: ObservableCity,
+      private observableTimezone: ObservableTimezone) {
   }
 
   ngOnInit(): void {
-    // TODO in different cities show time according time zone
-    this.time = formatDate(new Date, 'HH:mm cccc', 'en-US');
     // TODO handle errors
     this.geolocationService.detectCity().subscribe(this.updateCity);
+    this.observableTimezone.onChange(tz => {
+      this.time = formatDate(datetimeByOffset(tz.offset), 'HH:mm cccc', 'en-US');
+    });
   }
 
   updateCity = (city: string): void => {
