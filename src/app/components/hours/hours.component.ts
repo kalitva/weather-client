@@ -25,7 +25,6 @@ export class HoursComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  // TODO try to move in on city changed
   ngAfterViewChecked(): void {
     if (!this.hours) {
       return;

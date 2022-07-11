@@ -12,6 +12,7 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { CurrentConditionsComponent } from './components/current-conditions/current-conditions.component';
 import { HoursComponent } from './components/hours/hours.component';
 import { DaysComponent } from './components/days/days.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DaysComponent } from './components/days/days.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule
   ],

@@ -11,6 +11,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 export class TopBarComponent implements OnInit {
   city: string;
   time: string;
+  showForm: boolean;
 
   constructor(private geolocationService: GeolocationService, private observableCity: ObservableCity) {
   }
@@ -18,11 +19,13 @@ export class TopBarComponent implements OnInit {
   ngOnInit(): void {
     // TODO in different cities show time according time zone
     this.time = formatDate(new Date, 'HH:mm cccc', 'en-US');
-    // TODO doesn't work when browser asks to allow getting location
     // TODO handle errors
-    this.geolocationService.detectCity().subscribe(c => {
-      this.city = c;
-      this.observableCity.update(c);
-    });
+    this.geolocationService.detectCity().subscribe(this.updateCity);
   }
+
+  updateCity = (city: string): void => {
+    this.showForm = false;
+    this.city = city;
+    this.observableCity.update(city);
+  };
 }

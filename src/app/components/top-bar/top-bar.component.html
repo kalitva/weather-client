@@ -6,8 +6,17 @@
       </svg>
     </div>
     <h2 class="location">
-      <p>{{ city }}</p>
+      <p *ngIf="!showForm">{{ city }}</p>
+      <input
+          #input_city
+          id="input-city"
+          class="input-city"
+          *ngIf="showForm"
+          (keydown.enter)="updateCity(input_city.value)"
+          (keydown.escape)="showForm=false"
+      />
       <p class="time">{{ time }}</p>
     </h2>
+    <label class="another-city" for="input-city" (click)="showForm=!showForm">another city</label>
   </div>
 </header>
