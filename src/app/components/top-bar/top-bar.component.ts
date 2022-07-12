@@ -13,6 +13,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 export class TopBarComponent implements OnInit {
   city: string;
   time: string;
+  timezone: string;
   showForm: boolean;
 
   constructor(
@@ -26,6 +27,7 @@ export class TopBarComponent implements OnInit {
     this.geolocationService.detectCity().subscribe(this.updateCity);
     this.observableTimezone.onChange(tz => {
       this.time = formatDate(datetimeByOffset(tz.offset), 'HH:mm cccc', 'en-US');
+      this.timezone = tz.name;
     });
   }
 

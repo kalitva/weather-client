@@ -15,7 +15,10 @@
           (keydown.enter)="updateCity(input_city.value)"
           (keydown.escape)="showForm=false"
       />
-      <p class="time">{{ time }}</p>
+      <div>
+        <span class="time">{{ time }}</span>
+        <span class="timezone">{{ timezone }}</span>
+      </div>
     </h2>
     <label class="another-city" for="input-city" (click)="showForm=!showForm">another city</label>
   </div>

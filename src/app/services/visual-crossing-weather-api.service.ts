@@ -64,7 +64,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       description: today.description,
       decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
       icon: data.currentConditions.icon,
-      timezone: { timezone: data.timezone, offset: data.tzoffset },
+      timezone: { name: data.timezone, offset: data.tzoffset },
     };
   }
 
