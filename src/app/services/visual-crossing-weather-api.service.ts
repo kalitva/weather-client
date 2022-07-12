@@ -25,7 +25,18 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `/VisualCrossingWebServices/rest/services/timeline/${city}/today`,
       include: 'current',
-      mapper: this.jsonToCurrentConditions
+      mapper: data => {
+        const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
+        return {
+          temp: data.currentConditions.temp,
+          maxTemp: today.tempmax,
+          minTemp: today.tempmin,
+          description: today.description,
+          decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
+          icon: data.currentConditions.icon,
+          timezone: { name: data.timezone, offset: data.tzoffset },
+        };
+      }
     });
   }
 
@@ -33,7 +44,12 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`,
       include: 'hours',
-      mapper: this.jsonToHoursForecast
+      mapper: data => data.days.flatMap((d: any) => d.hours)
+        .map((h: any): Hour => ({
+          time: h.datetime.slice(0, -3), // cut seconds
+          temp: h.temp,
+          icon: h.icon
+        }))
     });
   }
 
@@ -41,7 +57,13 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`,
       include: 'days',
-      mapper: this.jsonToDaysForecast
+      mapper: data => data.days.slice(VisualCrossingWeatherApiService.NEXT_DAY_INDEX)
+        .map((d: any): Day => ({
+          date: d.datetime,
+          icon: d.icon,
+          minTemp: d.tempmin,
+          maxTemp: d.tempmax
+        }))
     });
   }
 
@@ -53,38 +75,6 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     };
     return this.httpClient.get(options.url, { params })
       .pipe(map(options.mapper));
-  }
-
-  private jsonToCurrentConditions(data: any): CurrentConditions {
-    const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
-    return {
-      temp: data.currentConditions.temp,
-      maxTemp: today.tempmax,
-      minTemp: today.tempmin,
-      description: today.description,
-      decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
-      icon: data.currentConditions.icon,
-      timezone: { name: data.timezone, offset: data.tzoffset },
-    };
-  }
-
-  private jsonToHoursForecast(data: any): Hour[] {
-    return data.days.flatMap((d: any) => d.hours)
-      .map((h: any): Hour => ({
-        time: h.datetime.slice(0, -3),
-        temp: h.temp,
-        icon: h.icon
-      }));
-  }
-
-  private jsonToDaysForecast(data: any): Day[] {
-    const days = data.days.slice(VisualCrossingWeatherApiService.NEXT_DAY_INDEX);
-    return days.map((d: any): Day => ({
-      date: d.datetime,
-      icon: d.icon,
-      minTemp: d.tempmin,
-      maxTemp: d.tempmax
-    }));
   }
 
   /*
