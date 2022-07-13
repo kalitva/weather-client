@@ -1,20 +1,58 @@
-.today-weather {
-  text-align: right;
+.current-conditions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   padding: 2rem;
 }
 
-.today-weather .min-max-temp {
+.current-conditions .left-section {
+  width: 40rem;
+}
+
+.current-conditions .left-section .description {
+  font-size: 1.3rem;
+  padding: 0.7rem 0;
+}
+
+.current-conditions .left-section .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 3.5rem;
+  border-bottom: 1px dotted rgba(255,255,255,0.2);
+}
+
+.current-conditions .left-section .row .label {
+  padding-left: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.current-conditions .left-section .row .value {
+  font-size: 1.6rem;
+  font-weight: var(--bold);
+}
+
+.current-conditions .left-section .row .metric {
+  font-size: 1.4rem;
+  padding-left: 0.2rem;
+}
+
+.current-conditions .right-section {
+  text-align: right;
+}
+
+.current-conditions .right-section .min-max-temp {
   font-size: 2rem;
 }
 
-.today-weather .temp {
+.current-conditions .right-section .temp {
   display: flex;
   justify-content: flex-end;
   font-size: 7rem;
   font-weight: var(--bold);
 }
 
-.today-weather .description {
-  font-size: 1.3rem;
-  padding: 0.7rem 0;
+.current-conditions .right-section .summary {
+  font-size: 2.1rem;
+  font-weight: var(--normal);
 }

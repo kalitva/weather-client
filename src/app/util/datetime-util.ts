@@ -1,9 +1,9 @@
 export function timeOfDayByOffset(offset: number): string {
   const hours = datetimeByOffset(offset).getHours();
-  if (hours >= 22 || hours >= 0 && hours < 7) {
+  if (hours >= 22 || hours >= 0 && hours < 6) {
     return 'night';
   }
-  if (hours >= 7 && hours < 11) {
+  if (hours >= 6 && hours < 11) {
     return 'morning';
   }
   if (hours >= 11 && hours < 19) {

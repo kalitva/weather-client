@@ -25,18 +25,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `/VisualCrossingWebServices/rest/services/timeline/${city}/today`,
       include: 'current',
-      mapper: data => {
-        const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
-        return {
-          temp: data.currentConditions.temp,
-          maxTemp: today.tempmax,
-          minTemp: today.tempmin,
-          description: today.description,
-          decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
-          icon: data.currentConditions.icon,
-          timezone: { name: data.timezone, offset: data.tzoffset },
-        };
-      }
+      mapper: this.toCurrentConditionsMapper
     });
   }
 
@@ -75,6 +64,26 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     };
     return this.httpClient.get(options.url, { params })
       .pipe(map(options.mapper));
+  }
+
+  private toCurrentConditionsMapper(data: any): CurrentConditions {
+    const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
+    return {
+      summary: data.currentConditions.conditions,
+      temp: data.currentConditions.temp,
+      maxTemp: today.tempmax,
+      minTemp: today.tempmin,
+      feelsLike: data.currentConditions.feelslike,
+      description: today.description,
+      decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
+      icon: data.currentConditions.icon,
+      timezone: { name: data.timezone, offset: data.tzoffset },
+      windSpeed: data.currentConditions.windspeed,
+      cloudCover: data.currentConditions.cloudcover,
+      humidity: data.currentConditions.humidity,
+      pressure: data.currentConditions.pressure,
+      uvIndex: data.currentConditions.uvindex,
+    };
   }
 
   /*

@@ -3,6 +3,7 @@ import { ObservableCity } from 'src/app/state/observable-city';
 import { ObservableTimezone } from 'src/app/state/observable-timezone';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
+import { uvIndexScale } from 'src/app/util/measure-util';
 
 @Component({
   selector: 'app-current-conditions',
@@ -15,10 +16,9 @@ export class CurrentConditionsComponent implements OnInit {
   currentConditions: CurrentConditions;
   iconSrc: string;
 
-  constructor(
-      private weatherApiService: WeatherApiService,
-      private observableCity: ObservableCity,
-      private observableTimezone: ObservableTimezone) {
+  constructor(private weatherApiService: WeatherApiService,
+              private observableCity: ObservableCity,
+              private observableTimezone: ObservableTimezone) {
     this.conditionsChanged = new EventEmitter();
   }
 
@@ -31,5 +31,9 @@ export class CurrentConditionsComponent implements OnInit {
         this.observableTimezone.update(cc.timezone);
       });
     });
+  }
+
+  uvIndexScale(uvIndex: number | undefined): string {
+    return uvIndexScale(uvIndex || 0);
   }
 }

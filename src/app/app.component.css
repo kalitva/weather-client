@@ -46,7 +46,7 @@
   font-size: 2rem;
 }
 
-.main-frame {
+.fixed-frame {
   position: fixed;
   left: 0;
   right: 0;
@@ -68,7 +68,7 @@
   display: none;
 }
 
-.content .main-conditions {
+.content .today {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -80,11 +80,11 @@
   background-color: var(--primary-background);
 }
 
-.forecast {
+.content .forecast {
   padding: 1rem 2rem;
 }
 
-.forecast .header {
+.content .forecast .header {
   padding: 1.5rem 1rem;
   font-size: 3rem;
   letter-spacing: 0.1rem;

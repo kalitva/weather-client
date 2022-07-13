@@ -1,8 +1,8 @@
 <div class="background-back" [style.backgroundImage]="backgroundImagePath"></div>
-<div class="background-front main-frame" [style.backgroundImage]="backgroundImagePath"></div>
+<div class="background-front fixed-frame" [style.backgroundImage]="backgroundImagePath"></div>
 <div [ngClass]="visorColorClass" class="top-visor"></div>
-<div class="content main-frame">
-  <div class="main-conditions">
+<div class="content fixed-frame">
+  <div class="today">
     <app-top-bar></app-top-bar>
     <app-current-conditions (conditionsChanged)="updateDecoration($event)"></app-current-conditions>
   </div>
