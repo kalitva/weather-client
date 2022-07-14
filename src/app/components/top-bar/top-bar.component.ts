@@ -6,7 +6,7 @@ import { datetimeByTimezoneOffset } from 'src/app/util/datetime-util';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
-import {Timezone} from 'src/app/model/timezone.model';
+import { Timezone } from 'src/app/model/timezone.model';
 
 @Component({
   selector: 'app-top-bar',
@@ -29,7 +29,7 @@ export class TopBarComponent implements OnInit {
   // TODO handle errors on detectCity() call
   ngOnInit(): void {
     const queryParams = new HttpParams({ fromString: window.location.search });
-    if (!queryParams.has('city')) {
+    if (!queryParams.get('city')) {
       this.geolocationService.detectCity().subscribe(this.navigateToCity);
     }
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
@@ -37,7 +37,7 @@ export class TopBarComponent implements OnInit {
   }
 
   navigateToCity = (city: string): void => {
-    this.router.navigate([], { queryParams: { city } });
+    city && this.router.navigate([], { queryParams: { city } });
   };
 
   private updateCityByQueryParams = (params: Params): void => {
