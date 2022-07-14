@@ -12,7 +12,7 @@
           id="input-city"
           class="input-city"
           *ngIf="showForm"
-          (keydown.enter)="updateCity(input_city.value)"
+          (keydown.enter)="navigateToCity(input_city.value)"
           (keydown.escape)="showForm=false"
       />
       <div>

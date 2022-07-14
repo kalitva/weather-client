@@ -1,7 +1,7 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ObservableCity } from 'src/app/state/observable-city';
 import { ObservableTimezone } from 'src/app/state/observable-timezone';
-import { datetimeByOffset } from 'src/app/util/datetime-util';
+import { datetimeByTimezoneOffset } from 'src/app/util/datetime-util';
 import { Hour } from 'src/app/model/hour.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
 
@@ -20,10 +20,9 @@ export class HoursComponent implements OnInit, AfterViewChecked {
 
   private date: Date;
 
-  constructor(
-      private weatherApiService: WeatherApiService,
-      private observableCity: ObservableCity,
-      private observableTimezone: ObservableTimezone) {
+  constructor(private weatherApiService: WeatherApiService,
+              private observableCity: ObservableCity,
+              private observableTimezone: ObservableTimezone) {
   }
 
   ngOnInit(): void {
@@ -31,7 +30,7 @@ export class HoursComponent implements OnInit, AfterViewChecked {
       this.weatherApiService.hoursForecast(c).subscribe(hf => this.hours = hf);
     });
     this.observableTimezone.onChange(tz => {
-      this.date = datetimeByOffset(tz.offset);
+      this.date = datetimeByTimezoneOffset(tz.offset);
     });
   }
 
