@@ -3,10 +3,10 @@ export function timeOfDayByOffset(offset: number): string {
   if (hours >= 22 || hours >= 0 && hours < 6) {
     return 'night';
   }
-  if (hours >= 6 && hours < 11) {
+  if (hours >= 6 && hours < 10) {
     return 'morning';
   }
-  if (hours >= 11 && hours < 19) {
+  if (hours >= 10 && hours < 19) {
     return 'day';
   }
   if (hours >= 19 && hours < 22) {

@@ -1,9 +1,9 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ObservableCity } from 'src/app/state/observable-city';
-import { ObservableTimezone } from 'src/app/state/observable-timezone';
 import { datetimeByTimezoneOffset } from 'src/app/util/datetime-util';
 import { Hour } from 'src/app/model/hour.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
+import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 
 @Component({
   selector: 'app-hours',
@@ -22,15 +22,15 @@ export class HoursComponent implements OnInit, AfterViewChecked {
 
   constructor(private weatherApiService: WeatherApiService,
               private observableCity: ObservableCity,
-              private observableTimezone: ObservableTimezone) {
+              private observableCurrentConditions: ObservableCurrentConditions) {
   }
 
   ngOnInit(): void {
     this.observableCity.onChanged(c => {
       this.weatherApiService.hoursForecast(c).subscribe(hf => this.hours = hf);
     });
-    this.observableTimezone.onChange(tz => {
-      this.date = datetimeByTimezoneOffset(tz.offset);
+    this.observableCurrentConditions.onChange(cc => {
+      this.date = datetimeByTimezoneOffset(cc.timezone.offset);
     });
   }
 

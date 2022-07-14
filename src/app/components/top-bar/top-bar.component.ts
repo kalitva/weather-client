@@ -1,12 +1,12 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ObservableCity } from 'src/app/state/observable-city';
-import { ObservableTimezone } from 'src/app/state/observable-timezone';
 import { datetimeByTimezoneOffset } from 'src/app/util/datetime-util';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
-import { Timezone } from 'src/app/model/timezone.model';
+import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
+import { CurrentConditions } from 'src/app/model/current-conditions.model';
 
 @Component({
   selector: 'app-top-bar',
@@ -23,7 +23,7 @@ export class TopBarComponent implements OnInit {
               private router: Router,
               private activatedRout: ActivatedRoute,
               private observableCity: ObservableCity,
-              private observableTimezone: ObservableTimezone) {
+              private observableCurrentConditions: ObservableCurrentConditions) {
   }
 
   // TODO handle errors on detectCity() call
@@ -33,7 +33,7 @@ export class TopBarComponent implements OnInit {
       this.geolocationService.detectCity().subscribe(this.navigateToCity);
     }
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
-    this.observableTimezone.onChange(this.setCurrentTimeAndTimezone);
+    this.observableCurrentConditions.onChange(this.setCurrentTimeAndTimezone);
   }
 
   navigateToCity = (city: string): void => {
@@ -47,7 +47,8 @@ export class TopBarComponent implements OnInit {
     this.observableCity.update(city);
   };
 
-  private setCurrentTimeAndTimezone = (timezone: Timezone): void => {
+  private setCurrentTimeAndTimezone = (currentConditions: CurrentConditions): void => {
+    const timezone = currentConditions.timezone;
     this.time = formatDate(datetimeByTimezoneOffset(timezone.offset), 'HH:mm cccc', 'en-US');
     this.timezone = timezone.name;
   };
