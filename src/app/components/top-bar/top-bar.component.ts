@@ -8,6 +8,7 @@ import { HttpParams } from '@angular/common/http';
 import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { Title } from '@angular/platform-browser';
+import { LoadingState } from 'src/app/state/loading-state';
 
 @Component({
   selector: 'app-top-bar',
@@ -21,11 +22,13 @@ export class TopBarComponent implements OnInit {
   showForm: boolean;
   showError: boolean;
   errorMessage: string;
+  loading: boolean;
 
   constructor(private geolocationService: GeolocationService,
               private router: Router,
               private activatedRout: ActivatedRoute,
               private title: Title,
+              private loadingState: LoadingState,
               private observableCity: ObservableCity,
               private observableCurrentConditions: ObservableCurrentConditions) {
   }
@@ -34,6 +37,7 @@ export class TopBarComponent implements OnInit {
     this.tryToDetectCity();
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
     this.observableCurrentConditions.onChange(this.setCurrentTimeAndTimezone);
+    this.loadingState.onChange(l => this.loading = l);
   }
 
   navigateToCity = (city: string): void => {

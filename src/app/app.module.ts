@@ -13,6 +13,7 @@ import { CurrentConditionsComponent } from './components/current-conditions/curr
 import { HoursComponent } from './components/hours/hours.component';
 import { DaysComponent } from './components/days/days.component';
 import { FormsModule } from '@angular/forms';
+import { ResponseLoadingStateInterceptor } from './interceptors/response-loading-state.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
   providers: [
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
     { provide: GeolocationService, useClass: TrueWayGeolocationService },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseLoadingStateInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
