@@ -20,6 +20,12 @@
         <span class="timezone">{{ timezone }}</span>
       </div>
     </h2>
-    <label class="another-city" for="input-city" (click)="showForm=!showForm">another city</label>
+    <label class="another-city" for="input-city" [ngClass]="{'blinked': showError}" (click)="showForm=!showForm">another city</label>
+    <div *ngIf="showError" class="error">
+      <span class="close" (click)="showError=false">X</span>
+      <p>Oops! An error occured trying to detect your city:</p>
+      <p class="message"> {{ errorMessage }} </p>
+      <p>Please, press 'another city' and type the city name you need</p>
+    </div>
   </div>
 </header>

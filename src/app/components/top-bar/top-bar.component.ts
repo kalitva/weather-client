@@ -18,6 +18,8 @@ export class TopBarComponent implements OnInit {
   time: string;
   timezone: string;
   showForm: boolean;
+  showError: boolean;
+  errorMessage: string;
 
   constructor(private geolocationService: GeolocationService,
               private router: Router,
@@ -28,10 +30,7 @@ export class TopBarComponent implements OnInit {
 
   // TODO handle errors on detectCity() call
   ngOnInit(): void {
-    const queryParams = new HttpParams({ fromString: window.location.search });
-    if (!queryParams.get('city')) {
-      this.geolocationService.detectCity().subscribe(this.navigateToCity);
-    }
+    this.tryToDetectCity();
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
     this.observableCurrentConditions.onChange(this.setCurrentTimeAndTimezone);
   }
@@ -40,16 +39,36 @@ export class TopBarComponent implements OnInit {
     city && this.router.navigate([], { queryParams: { city } });
   };
 
+  private tryToDetectCity(): void {
+    const queryParams = new HttpParams({ fromString: window.location.search });
+    if (queryParams.get('city')) {
+      return;
+    }
+    this.geolocationService.detectCity().subscribe({
+      next: this.navigateToCity,
+      error: this.detectCityErrorHandler
+    });
+  }
+
   private updateCityByQueryParams = (params: Params): void => {
     const city = params['city'];
-    this.showForm = false;
-    this.city = city;
-    this.observableCity.update(city);
+    if (city) {
+      this.showForm = false;
+      this.city = city;
+      this.observableCity.update(city);
+    }
   };
 
   private setCurrentTimeAndTimezone = (currentConditions: CurrentConditions): void => {
     const timezone = currentConditions.timezone;
     this.time = formatDate(datetimeByTimezoneOffset(timezone.offset), 'HH:mm cccc', 'en-US');
     this.timezone = timezone.name;
+  };
+
+  private detectCityErrorHandler = (error: Error): void => {
+    this.errorMessage = error.message;
+    this.showError = true;
+    this.navigateToCity(GeolocationService.DEFAULT_CITY);
+    setTimeout(() => this.showError = false, 10_000);
   };
 }
