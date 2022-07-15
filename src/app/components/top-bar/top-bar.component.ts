@@ -7,6 +7,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-top-bar',
@@ -24,11 +25,11 @@ export class TopBarComponent implements OnInit {
   constructor(private geolocationService: GeolocationService,
               private router: Router,
               private activatedRout: ActivatedRoute,
+              private title: Title,
               private observableCity: ObservableCity,
               private observableCurrentConditions: ObservableCurrentConditions) {
   }
 
-  // TODO handle errors on detectCity() call
   ngOnInit(): void {
     this.tryToDetectCity();
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
@@ -56,6 +57,7 @@ export class TopBarComponent implements OnInit {
       this.showForm = false;
       this.city = city;
       this.observableCity.update(city);
+      this.title.setTitle(`Weather – ${city}`);
     }
   };
 
