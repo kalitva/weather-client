@@ -23,7 +23,7 @@ export class TrueWayGeolocationService implements GeolocationService {
     return from(
       new Promise<GeolocationCoordinates>(callback)
         .then(coords => ({ location: `${coords.latitude},${coords.longitude}`, language: 'en' }))
-        .then((params => firstValueFrom(this.httpClient.get(url, { headers, params }))))
+        .then(params => firstValueFrom(this.httpClient.get(url, { headers, params })))
         .then((data: any) => data.results[1].locality)
         .catch(e => { throw e; })
     );

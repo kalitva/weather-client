@@ -1,6 +1,6 @@
-<div class="background-back" [style.backgroundImage]="backgroundImagePath"></div>
-<div class="background-front fixed-frame" [style.backgroundImage]="backgroundImagePath"></div>
-<div [ngClass]="visorColorClass" class="top-visor"></div>
+<div class="background-back background-default" [style.backgroundImage]="backgroundImagePath"></div>
+<div class="background-front background-default fixed-frame" [style.backgroundImage]="backgroundImagePath"></div>
+<div class="top-visor" [ngClass]="visorColorClass"></div>
 <div class="content fixed-frame">
   <div class="today">
     <app-top-bar></app-top-bar>

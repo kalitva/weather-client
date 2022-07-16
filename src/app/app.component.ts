@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { timeOfDayByOffset } from './util/datetime-util';
 import { CurrentConditions } from './model/current-conditions.model';
 import { ObservableCurrentConditions } from './state/observable-current-conditions';
+import { timeOfDayByTimezoneOffset } from './util/datetime-util';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   private updateDecoration = (currentConditions: CurrentConditions): void => {
-    const timeOfDay = timeOfDayByOffset(currentConditions.timezone.offset);
+    const timeOfDay = timeOfDayByTimezoneOffset(currentConditions.timezone.offset);
     this.backgroundImagePath = `url(assets/bg/${timeOfDay}/${currentConditions.decoration}.jpg)`;
     this.visorColorClass = `visor-color-${currentConditions.decoration}`;
   };

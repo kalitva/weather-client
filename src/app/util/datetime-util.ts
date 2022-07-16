@@ -1,4 +1,4 @@
-export function timeOfDayByOffset(offset: number): string {
+export function timeOfDayByTimezoneOffset(offset: number): string {
   const hours = datetimeByTimezoneOffset(offset).getHours();
   if (hours >= 22 || hours >= 0 && hours < 6) {
     return 'night';

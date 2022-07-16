@@ -35,7 +35,7 @@ export class HoursComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    if (!this.hours) {
+    if (!this.hours || !this.date) {
       return;
     }
     const paneToScroll = this.date.getHours() + 1;
