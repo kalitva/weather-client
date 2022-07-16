@@ -3,17 +3,17 @@ import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoadingState {
-  private readonly loaded: Subject<boolean>;
+  private readonly beingLoaded: Subject<boolean>;
 
   constructor() {
-    this.loaded = new Subject();
+    this.beingLoaded = new Subject();
   }
 
-  update(loaded: boolean): void {
-    this.loaded.next(loaded);
+  update(beingLoaded: boolean): void {
+    this.beingLoaded.next(beingLoaded);
   }
 
-  onChange(subscriber: (loaded: boolean) => void): void {
-    this.loaded.subscribe(subscriber);
+  onChange(subscriber: (beingLoaded: boolean) => void): void {
+    this.beingLoaded.subscribe(subscriber);
   }
 }

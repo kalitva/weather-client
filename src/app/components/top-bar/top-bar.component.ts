@@ -23,7 +23,7 @@ export class TopBarComponent implements OnInit {
   showForm: boolean;
   showError: boolean;
   errorMessage: string;
-  loading: boolean;
+  beingLoaded: boolean;
 
   constructor(private geolocationService: GeolocationService,
               private router: Router,
@@ -38,7 +38,7 @@ export class TopBarComponent implements OnInit {
     this.tryToDetectCity();
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
     this.observableCurrentConditions.onChange(this.setCurrentConditionsData);
-    this.loadingState.onChange(l => this.loading = l);
+    this.loadingState.onChange(l => this.beingLoaded = l);
   }
 
   navigateToCity = (city: string): void => {
