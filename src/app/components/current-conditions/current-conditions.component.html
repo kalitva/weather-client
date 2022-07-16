@@ -1,6 +1,5 @@
 <section class="current-conditions">
   <div class="left-section">
-    <p class="description">{{ currentConditions?.description }}</p>
     <div class="row">
       <div>
         <svg height="24" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +89,7 @@
     </div>
     <div class="temp">
       <img [src]="iconSrc"/>
-      <span>{{ currentConditions?.temp }}°</span>
+      <span>{{ currentConditions?.temp }}<span class="metric">°</span></span>
     </div>
     <h2 class="summary">{{ currentConditions?.summary }}</h2>
   </div>

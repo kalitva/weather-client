@@ -18,6 +18,7 @@ import { LoadingState } from 'src/app/state/loading-state';
 export class TopBarComponent implements OnInit {
   city: string;
   time: string;
+  currentConditions: CurrentConditions;
   timezone: string;
   showForm: boolean;
   showError: boolean;
@@ -36,7 +37,7 @@ export class TopBarComponent implements OnInit {
   ngOnInit(): void {
     this.tryToDetectCity();
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParams);
-    this.observableCurrentConditions.onChange(this.setCurrentTimeAndTimezone);
+    this.observableCurrentConditions.onChange(this.setCurrentConditionsData);
     this.loadingState.onChange(l => this.loading = l);
   }
 
@@ -65,7 +66,8 @@ export class TopBarComponent implements OnInit {
     }
   };
 
-  private setCurrentTimeAndTimezone = (currentConditions: CurrentConditions): void => {
+  private setCurrentConditionsData = (currentConditions: CurrentConditions): void => {
+    this.currentConditions = currentConditions;
     const timezone = currentConditions.timezone;
     this.time = formatDate(datetimeByTimezoneOffset(timezone.offset), 'HH:mm cccc', 'en-US');
     this.timezone = timezone.name;

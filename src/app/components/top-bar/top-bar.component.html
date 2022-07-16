@@ -5,7 +5,7 @@
         <path fill="#fff" d="m14.92 22.84-5.639-8.121L1.16 9.08l21.5-7.741zM5.485 9.648l5.234 3.633 3.633 5.234 4.987-13.854z"/>
       </svg>
     </div>
-    <h2 class="location">
+    <h2 class="summary">
       <p *ngIf="!showForm">{{ city }}</p>
       <input
           #input_city
@@ -19,6 +19,7 @@
         <span class="time">{{ time }}</span>
         <span class="timezone">{{ timezone }}</span>
       </div>
+      <p class="description">{{ currentConditions?.description }}</p>
     </h2>
     <label class="another-city" for="input-city" [ngClass]="{'blinked': showError}" (click)="showForm=!showForm">another city</label>
     <div *ngIf="showError" class="error">

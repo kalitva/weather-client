@@ -47,7 +47,7 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 10rem;
+  height: 13rem;
   font-size: 2rem;
 }
 
@@ -63,6 +63,8 @@
 .content {
   z-index: 2;
   font-family: 'Montserrat', sans-serif;
+  font-weight: var(--normal);
+  letter-spacing: -0.05rem;
   color: white;
   overflow: auto;
   scrollbar-width: none;

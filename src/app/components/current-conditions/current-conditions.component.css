@@ -9,11 +9,6 @@
   width: 40rem;
 }
 
-.current-conditions .left-section .description {
-  font-size: 1.3rem;
-  padding: 0.7rem 0;
-}
-
 .current-conditions .left-section .row {
   display: flex;
   justify-content: space-between;
@@ -33,8 +28,9 @@
 }
 
 .current-conditions .left-section .row .metric {
-  font-size: 1.4rem;
   padding-left: 0.2rem;
+  font-size: 1.4rem;
+  vertical-align: top;
 }
 
 .current-conditions .right-section {
@@ -50,6 +46,12 @@
   justify-content: flex-end;
   font-size: 7rem;
   font-weight: var(--bold);
+}
+
+.current-conditions .right-section .temp .metric{
+  font-size: 5.5rem;
+  font-weight: var(--normal);
+  vertical-align: top;
 }
 
 .current-conditions .right-section .summary {
