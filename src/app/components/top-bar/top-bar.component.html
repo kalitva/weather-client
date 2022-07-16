@@ -14,6 +14,7 @@
           *ngIf="showForm"
           (keydown.enter)="navigateToCity(input_city.value)"
           (keydown.escape)="showForm=false"
+          (blur)="showForm=false"
       />
       <div>
         <span class="time">{{ time }}</span>
@@ -21,7 +22,9 @@
       </div>
       <p class="description">{{ currentConditions?.description }}</p>
     </h2>
-    <label class="another-city" for="input-city" [ngClass]="{'blinked': showError}" (click)="showForm=!showForm">another city</label>
+    <label class="another-city" for="input-city" [ngClass]="{'blinked': showError}" (click)="showForm=true">
+      another city
+    </label>
     <div *ngIf="showError" class="error">
       <span class="close" (click)="showError=false">X</span>
       <p>Oops! An error occured trying to detect your city:</p>
