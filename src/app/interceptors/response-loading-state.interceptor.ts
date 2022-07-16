@@ -27,6 +27,7 @@ export class ResponseLoadingStateInterceptor implements HttpInterceptor {
 
   private errorHandler = (error: Error): Observable<HttpEvent<unknown>> => {
     this.loadingState.update(false);
+    this.waitingRequests = 0;
     throw error;
   };
 }
