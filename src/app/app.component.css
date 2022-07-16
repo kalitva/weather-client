@@ -1,3 +1,7 @@
+.visor-color-default {
+  background-color: rgba(0,0,0,0.1);
+}
+
 .visor-color-clear {
   background-color: rgba(5,49,99, 0.3);
 }

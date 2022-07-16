@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentConditions } from './model/current-conditions.model';
+import { LoadingState } from './state/loading-state';
 import { ObservableCurrentConditions } from './state/observable-current-conditions';
 import { timeOfDayByTimezoneOffset } from './util/datetime-util';
 
@@ -11,12 +12,15 @@ import { timeOfDayByTimezoneOffset } from './util/datetime-util';
 export class AppComponent implements OnInit {
   backgroundImagePath: string;
   visorColorClass: string;
+  beingLoaded: boolean;
 
-  constructor(private observableCurrentConditions: ObservableCurrentConditions) {
+  constructor(private observableCurrentConditions: ObservableCurrentConditions,
+              private loadingState: LoadingState) {
   }
 
   ngOnInit(): void {
     this.observableCurrentConditions.onChange(this.updateDecoration);
+    this.loadingState.onChange(bl => this.beingLoaded = bl);
   }
 
   private updateDecoration = (currentConditions: CurrentConditions): void => {

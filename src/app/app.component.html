@@ -1,12 +1,12 @@
 <div class="background-back background-default" [style.backgroundImage]="backgroundImagePath"></div>
 <div class="background-front background-default fixed-frame" [style.backgroundImage]="backgroundImagePath"></div>
-<div class="top-visor" [ngClass]="visorColorClass"></div>
+<div class="top-visor visor-color-default" [ngClass]="visorColorClass"></div>
 <div class="content fixed-frame">
   <div class="today">
     <app-top-bar></app-top-bar>
-    <app-current-conditions></app-current-conditions>
+    <app-current-conditions [hidden]="beingLoaded"></app-current-conditions>
   </div>
-  <div class="forecast">
+  <div class="forecast" [hidden]="beingLoaded">
     <h2 class="header">Forecast</h2>
     <app-hours></app-hours>
     <app-days></app-days>
