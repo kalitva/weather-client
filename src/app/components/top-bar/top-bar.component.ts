@@ -9,6 +9,8 @@ import { ObservableCurrentConditions } from 'src/app/state/observable-current-co
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { Title } from '@angular/platform-browser';
 import { LoadingState } from 'src/app/state/loading-state';
+import { ErrorState } from 'src/app/state/error-state';
+import { ErrorInfo } from 'src/app/model/error-info.model';
 
 @Component({
   selector: 'app-top-bar',
@@ -24,12 +26,14 @@ export class TopBarComponent implements OnInit {
   showError: boolean;
   errorMessage: string;
   beingLoaded: boolean;
+  errorInfo: ErrorInfo;
 
   constructor(private geolocationService: GeolocationService,
               private router: Router,
               private activatedRout: ActivatedRoute,
               private title: Title,
               private loadingState: LoadingState,
+              private errorState: ErrorState,
               private observableCity: ObservableCity,
               private observableCurrentConditions: ObservableCurrentConditions) {
   }
@@ -39,6 +43,7 @@ export class TopBarComponent implements OnInit {
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParam);
     this.observableCurrentConditions.onChange(this.setCurrentConditionsData);
     this.loadingState.onChange(bl => this.beingLoaded = bl);
+    this.errorState.onError(this.reportError);
   }
 
   navigateToCity = (city: string): void => {
@@ -77,10 +82,18 @@ export class TopBarComponent implements OnInit {
     this.timezone = timezone.name;
   };
 
-  private detectCityErrorHandler = (error: Error): void => {
-    this.errorMessage = error.message;
+
+  private reportError = (errorInfo: ErrorInfo): void => {
     this.showError = true;
+    this.errorInfo = errorInfo;
+  };
+
+  private detectCityErrorHandler = (error: Error): void => {
+    this.errorState.riseError({
+      problem: 'Oops! An error occured trying to detect your city:',
+      message: error.message,
+      advice: 'Please, press "another city" and type the city name you need'
+    });
     this.navigateToCity(GeolocationService.DEFAULT_CITY);
-    setTimeout(() => this.showError = false, 10_000);
   };
 }

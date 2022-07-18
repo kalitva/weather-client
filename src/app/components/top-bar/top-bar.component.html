@@ -23,14 +23,14 @@
       </div>
       <p class="description">{{ currentConditions?.description }}</p>
     </h2>
-    <label class="another-city" for="input-city" [ngClass]="{'blinked': showError}" (click)="showForm=true">
+    <label class="another-city" for="input-city" (click)="showForm=true">
       another city
     </label>
     <div *ngIf="showError" class="error">
-      <span class="close" (click)="showError=false">X</span>
-      <p>Oops! An error occured trying to detect your city:</p>
-      <p class="message"> {{ errorMessage }} </p>
-      <p>Please, press 'another city' and type the city name you need</p>
+      <div class="close" (click)="showError=false">X</div>
+      <p> {{ errorInfo?.problem }}</p>
+      <p class="message"> {{ errorInfo.message }} </p>
+      <p>{{ errorInfo?.advice }}</p>
     </div>
   </div>
 </header>
