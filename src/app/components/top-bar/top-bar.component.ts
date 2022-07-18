@@ -45,6 +45,10 @@ export class TopBarComponent implements OnInit {
     city.trim() && this.router.navigate([], { queryParams: { city } });
   };
 
+  restrictChars(event: KeyboardEvent): boolean {
+    return /[\w|\-|\s]/.test(event.key);
+  }
+
   private tryToDetectCity(): void {
     const queryParams = new HttpParams({ fromString: window.location.search });
     if (queryParams.get('city')) {

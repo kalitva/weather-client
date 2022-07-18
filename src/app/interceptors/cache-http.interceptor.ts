@@ -27,7 +27,6 @@ export class CacheHttpInterceptor implements HttpInterceptor {
 
   private hashFromRequest(request: HttpRequest<unknown>): string {
     const date = new Date().toISOString().slice(0, CacheHttpInterceptor.DATE_AND_HOURS_LENGTH);
-    console.dir(request);
     if (request.method === 'GET') {
       return request.urlWithParams + date;
     }

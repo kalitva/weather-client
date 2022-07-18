@@ -12,6 +12,7 @@
           id="input-city"
           class="input-city"
           *ngIf="showForm"
+          (keypress)="restrictChars($event)"
           (keydown.enter)="navigateToCity(input_city.value)"
           (keydown.escape)="showForm=false"
           (blur)="showForm=false"
