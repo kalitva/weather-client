@@ -69,6 +69,7 @@ export class TopBarComponent implements OnInit {
     const city = params['city'];
     if (city) {
       this.showForm = false;
+      this.showError = false;
       this.city = city;
       this.observableCity.update(city);
       this.title.setTitle(`Weather – ${city}`);

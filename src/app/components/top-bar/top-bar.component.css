@@ -78,7 +78,7 @@
 }
 
 .top-bar-fixed .top-bar .error .message {
-  color: red;
+  color: orange;
   font-weight: var(--bold);
 }
 
