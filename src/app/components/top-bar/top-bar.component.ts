@@ -61,7 +61,7 @@ export class TopBarComponent implements OnInit {
     }
     this.geolocationService.detectCity().subscribe({
       next: this.navigateToCity,
-      error: this.detectCityErrorHandler
+      error: this.errorHandler
     });
   }
 
@@ -69,7 +69,6 @@ export class TopBarComponent implements OnInit {
     const city = params['city'];
     if (city) {
       this.showForm = false;
-      this.showError = false;
       this.city = city;
       this.observableCity.update(city);
       this.title.setTitle(`Weather – ${city}`);
@@ -87,9 +86,10 @@ export class TopBarComponent implements OnInit {
   private reportError = (errorInfo: ErrorInfo): void => {
     this.showError = true;
     this.errorInfo = errorInfo;
+    setTimeout(() => this.showError = false, 10_000);
   };
 
-  private detectCityErrorHandler = (error: Error): void => {
+  private errorHandler = (error: Error): void => {
     this.errorState.riseError({
       problem: 'Oops! An error occured trying to detect your city:',
       message: error.message,
