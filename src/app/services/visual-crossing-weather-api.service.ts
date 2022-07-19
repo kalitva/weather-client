@@ -23,7 +23,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
 
   currentConditions(city: string): Observable<CurrentConditions> {
     return this.doGet({
-      url: `/VisualCrossingWebServices/rest/services/timeline/${city}/today`,
+      url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today`,
       include: 'current',
       mapper: this.toCurrentConditionsMapper
     });
@@ -31,7 +31,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
 
   hoursForecast(city: string): Observable<Hour[]> {
     return this.doGet({
-      url: `/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`,
+      url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`,
       include: 'hours',
       mapper: data => data.days.flatMap((d: any) => d.hours)
         .map((h: any): Hour => ({
@@ -44,7 +44,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
 
   next10DaysForecast(city: string): Observable<Day[]> {
     return this.doGet({
-      url: `/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`,
+      url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`,
       include: 'days',
       mapper: data => data.days.slice(VisualCrossingWeatherApiService.NEXT_DAY_INDEX)
         .map((d: any): Day => ({
