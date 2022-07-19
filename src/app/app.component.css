@@ -37,7 +37,7 @@
 
 .background-front {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-size: 100% 100%;
+  background-size: 100% auto;
 }
 
 .background-default {
