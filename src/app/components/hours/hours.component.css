@@ -1,6 +1,6 @@
 .hours {
   display: flex;
-  column-gap: 0.6rem;
+  column-gap: 0.65rem;
   overflow: auto;
   cursor: pointer;
   scrollbar-width: none;
@@ -12,8 +12,8 @@
 }
 
 .hours .hour {
-  min-width: 10rem;
-  min-height: 10rem;
+  min-width: 9rem;
+  min-height: 9rem;
   border-radius: 1rem;
   text-align: center;
   background-color: rgba(255,255,255,0.05);
@@ -35,5 +35,5 @@
 }
 
 .hours .hour .temp {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }

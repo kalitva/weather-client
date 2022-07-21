@@ -11,7 +11,7 @@ import { ObservableCurrentConditions } from 'src/app/state/observable-current-co
   styleUrls: ['./hours.component.css']
 })
 export class HoursComponent implements OnInit, AfterViewChecked {
-  private static readonly HOUR_CONTAINER_WIDTH = 100 + 6;
+  private static readonly HOUR_CONTAINER_WIDTH = 90 + 6.5;
 
   // TODO try to implement draggable scroll
   @ViewChild('slider') slider: ElementRef;

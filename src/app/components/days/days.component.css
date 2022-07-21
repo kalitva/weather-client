@@ -12,7 +12,7 @@
 }
 
 .days .day .date {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .days .day .conditions {
@@ -22,7 +22,7 @@
 }
 
 .days .day .conditions .icon {
-  width: 5rem;
+  width: 4.5rem;
 }
 
 .days .day .conditions .temp {
@@ -32,5 +32,5 @@
   align-items: flex-start;
   width: 5rem;
   gap: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }

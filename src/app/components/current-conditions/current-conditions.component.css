@@ -6,30 +6,30 @@
 }
 
 .current-conditions .left-section {
-  width: 40rem;
+  width: 45rem;
 }
 
 .current-conditions .left-section .row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  height: 3.5rem;
+  height: 3.4rem;
   border-bottom: 1px dotted rgba(255,255,255,0.2);
 }
 
 .current-conditions .left-section .row .label {
   padding-left: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .current-conditions .left-section .row .value {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: var(--bold);
 }
 
 .current-conditions .left-section .row .metric {
   padding-left: 0.2rem;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   vertical-align: top;
 }
 
@@ -44,17 +44,17 @@
 .current-conditions .right-section .temp {
   display: flex;
   justify-content: flex-end;
-  font-size: 7rem;
+  font-size: 6rem;
   font-weight: var(--bold);
 }
 
-.current-conditions .right-section .temp .metric{
+.current-conditions .right-section .temp .metric {
   font-size: 5.5rem;
   font-weight: var(--normal);
   vertical-align: top;
 }
 
 .current-conditions .right-section .summary {
-  font-size: 2.1rem;
+  font-size: 1.8rem;
   font-weight: var(--normal);
 }
