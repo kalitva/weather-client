@@ -47,7 +47,9 @@ export class TopBarComponent implements OnInit {
   }
 
   navigateToCity = (city: string): void => {
-    city.trim() && this.router.navigate([], { queryParams: { city } });
+    if (city) {
+      this.router.navigate([], { queryParams: { city } });
+    }
   };
 
   restrictChars(event: KeyboardEvent): boolean {

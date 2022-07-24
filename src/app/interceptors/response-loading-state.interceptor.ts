@@ -22,7 +22,11 @@ export class ResponseLoadingStateInterceptor implements HttpInterceptor {
     this.waitingRequests++;
     return next.handle(request)
       .pipe(catchError(this.errorHandler))
-      .pipe(tap(e => e instanceof HttpResponse && this.loadingState.update(!!(--this.waitingRequests))));
+      .pipe(tap(event => {
+        if (event instanceof HttpResponse) {
+          this.loadingState.update(!!(--this.waitingRequests));
+        }
+      }));
   }
 
   private errorHandler = (error: Error): Observable<HttpEvent<unknown>> => {

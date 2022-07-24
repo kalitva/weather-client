@@ -32,7 +32,7 @@ export class CurrentConditionsComponent implements OnInit {
   }
 
   uvIndexScale(uvIndex: number | undefined): string {
-    return uvIndexScale(uvIndex || 0);
+    return uvIndexScale(uvIndex ?? 0);
   }
 
   private setCurrentConditionsData = (currentConditions: CurrentConditions): void => {

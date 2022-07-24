@@ -17,12 +17,16 @@ export class CacheHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const hash = this.hashFromRequest(request);
-    const cached = localStorage.getItem(hash) || '';
+    const cached = localStorage.getItem(hash) ?? '';
     if (cached) {
       return of(new HttpResponse(JSON.parse(cached)));
     }
     return next.handle(request)
-      .pipe(tap(event => event instanceof HttpResponse && this.setItem(hash, JSON.stringify(event))));
+      .pipe(tap(event => {
+        if (event instanceof HttpResponse) {
+          this.setItem(hash, JSON.stringify(event));
+        }
+      }));
   }
 
   private hashFromRequest(request: HttpRequest<unknown>): string {
