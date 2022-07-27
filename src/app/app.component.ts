@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
 
   constructor(private observableCurrentConditions: ObservableCurrentConditions,
               private loadingState: LoadingState) {
+    this.backgroundImagePath = 'url(assets/bg/default.jpg)';
+    this.beingLoaded = true;
   }
 
   ngOnInit(): void {
