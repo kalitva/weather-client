@@ -14,6 +14,8 @@ import { HoursComponent } from './components/hours/hours.component';
 import { DaysComponent } from './components/days/days.component';
 import { FormsModule } from '@angular/forms';
 import { ResponseLoadingStateInterceptor } from './interceptors/response-loading-state.interceptor';
+import { BackgroundService } from './services/background.service';
+import { UnplashBackgroundService } from './services/unplash-background.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { ResponseLoadingStateInterceptor } from './interceptors/response-loading
   providers: [
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
     { provide: GeolocationService, useClass: TrueWayGeolocationService },
+    { provide: BackgroundService, useClass: UnplashBackgroundService },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseLoadingStateInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
   ],

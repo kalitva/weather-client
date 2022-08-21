@@ -69,6 +69,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   private toCurrentConditionsMapper(data: any): CurrentConditions {
     const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
     return {
+      address: data.address,
       summary: data.currentConditions.conditions,
       temp: data.currentConditions.temp,
       maxTemp: today.tempmax,

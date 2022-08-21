@@ -3,6 +3,7 @@ import { Icon } from './icon.enum';
 import { Timezone } from './timezone.model';
 
 export interface CurrentConditions {
+  address: string;
   summary: string;
   temp: number;
   maxTemp: number;
