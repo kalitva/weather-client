@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
@@ -12,7 +13,7 @@ export class UnplashBackgroundService implements BackgroundService {
     const url = 'https://api.unsplash.com/photos/random';
     const headers = { Authorization: 'Client-ID y50lBisTw7_lv5vAZqQt5smFdqz4vRBdONFrk766XvY' };
     const params = {
-      // topics: 'weather',
+      topics: 'nature',
       orientation: 'portrait',
       content_filter: 'high',
       query,

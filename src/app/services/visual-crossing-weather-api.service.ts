@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
@@ -11,6 +12,13 @@ import { WeatherApiService } from './weather-api.service';
  * resource: https://www.visualcrossing.com/
  * timeline api: https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/
  */
+
+interface Options<T> {
+  url: string,
+  include: string,
+  mapper: (data: any) => T
+}
+
 @Injectable()
 export class VisualCrossingWeatherApiService implements WeatherApiService {
   private static readonly API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
@@ -56,7 +64,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     });
   }
 
-  private doGet<T>(options: { url: string, include: string, mapper: (data: any) => T }): Observable<T> {
+  private doGet<T>(options: Options<T>): Observable<T> {
     const params = {
       key: VisualCrossingWeatherApiService.API_KEY,
       unitGroup: 'metric',

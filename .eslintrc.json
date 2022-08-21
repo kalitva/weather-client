@@ -21,14 +21,16 @@
     "object-shorthand": "warn",
     "object-curly-spacing": ["warn", "always"],
     "comma-spacing": ["warn", { "before": false, "after": true }],
-    "keyword-spacing": ["warn", "never"],
     "template-curly-spacing": "warn",
     "space-before-blocks": "warn",
     "keyword-spacing": "warn",
     "eol-last": "warn",
     "no-param-reassign": "warn",
     "prefer-const": "warn",
-    "max-len": ["warn", { "code": 120 }],
+    "max-len": ["warn", 100, {
+      "ignoreStrings": true,
+      "ignoreUrls": true
+    }],
     "no-tabs": "warn",
     "indent": ["warn", 2],
     "linebreak-style": ["warn", "unix"],

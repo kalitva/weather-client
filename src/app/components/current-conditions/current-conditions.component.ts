@@ -44,7 +44,9 @@ export class CurrentConditionsComponent implements OnInit {
   private errorHandler = (error: Error): void => {
     this.errorState.riseError({
       problem: 'Oops! An error ocurred trying to get current weather:',
-      message: error instanceof HttpErrorResponse ? (error as HttpErrorResponse).error : error.message
+      message: error instanceof HttpErrorResponse
+        ? (error as HttpErrorResponse).error
+        : error.message
     });
   };
 }

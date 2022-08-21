@@ -12,8 +12,10 @@ import { WeatherApiService } from 'src/app/services/weather-api.service';
 export class DaysComponent implements OnInit {
   days: Day[];
 
-  constructor(private weatherApiService: WeatherApiService, private observableCity: ObservableCity) {
-  }
+  constructor(
+    private weatherApiService: WeatherApiService,
+    private observableCity: ObservableCity
+  ) {}
 
   ngOnInit(): void {
     this.observableCity.onChanged(c => {
