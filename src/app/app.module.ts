@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ResponseLoadingStateInterceptor } from './interceptors/response-loading-state.interceptor';
 import { CitySearchService } from './services/city-search.service';
 import { SpottCitySearchService } from './services/spott-city-search.service';
+import { ErrorAlertComponent } from './components/error-alert/error-alert.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SpottCitySearchService } from './services/spott-city-search.service';
     CurrentConditionsComponent,
     HoursComponent,
     DaysComponent,
+    ErrorAlertComponent,
   ],
   imports: [
     BrowserModule,

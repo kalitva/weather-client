@@ -19,18 +19,13 @@
       />
       <div>
         <span class="time">{{ time }}</span>
-        <span class="timezone">{{ timezone }}</span>
+        <span class="timezone">{{ currentConditions?.timezone?.name }}</span>
       </div>
       <p class="description">{{ currentConditions?.description }}</p>
     </h2>
     <label class="another-city" for="input-city" (click)="showForm=true">
-      another city
+      <span>another city</span>
     </label>
-    <div *ngIf="showError" class="error">
-      <div class="close" (click)="showError=false">X</div>
-      <p> {{ errorInfo?.problem }}</p>
-      <p class="message"> {{ errorInfo.message }} </p>
-      <p>{{ errorInfo?.advice }}</p>
-    </div>
+    <app-error-alert></app-error-alert>
   </div>
 </header>

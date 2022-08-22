@@ -7,10 +7,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
-import { Title } from '@angular/platform-browser';
 import { LoadingState } from 'src/app/state/loading-state';
 import { ErrorState } from 'src/app/state/error-state';
-import { ErrorInfo } from 'src/app/model/error-info.model';
 
 @Component({
   selector: 'app-top-bar',
@@ -21,29 +19,27 @@ export class TopBarComponent implements OnInit {
   city: string;
   time: string;
   currentConditions: CurrentConditions;
-  timezone: string;
   showForm: boolean;
-  showError: boolean;
-  errorMessage: string;
   beingLoaded: boolean;
-  errorInfo: ErrorInfo;
 
-  constructor(private geolocationService: GeolocationService,
-              private router: Router,
-              private activatedRout: ActivatedRoute,
-              private title: Title,
-              private loadingState: LoadingState,
-              private errorState: ErrorState,
-              private observableCity: ObservableCity,
-              private observableCurrentConditions: ObservableCurrentConditions) {
-  }
+  constructor(
+    private geolocationService: GeolocationService,
+    private router: Router,
+    private activatedRout: ActivatedRoute,
+    private loadingState: LoadingState,
+    private errorState: ErrorState,
+    private observableCity: ObservableCity,
+    private observableCurrentConditions: ObservableCurrentConditions,
+  ) { }
 
   ngOnInit(): void {
     this.tryToDetectCity();
     this.activatedRout.queryParams.subscribe(this.updateCityByQueryParam);
-    this.observableCurrentConditions.onChange(this.setCurrentConditionsData);
+    this.observableCurrentConditions.onChange(cc => {
+      this.currentConditions = cc;
+      this.time = formatDate(datetimeByTimezoneOffset(cc.timezone.offset), 'HH:mm cccc', 'en-US');
+    });
     this.loadingState.onChange(bl => this.beingLoaded = bl);
-    this.errorState.onError(this.reportError);
   }
 
   navigateToCity = (city: string): void => {
@@ -58,12 +54,19 @@ export class TopBarComponent implements OnInit {
 
   private tryToDetectCity(): void {
     const queryParams = new HttpParams({ fromString: window.location.search });
-    if (queryParams.get('city')) {
+    if (queryParams.get('city')) { // if the url already contains a city param
       return;
     }
     this.geolocationService.detectCity().subscribe({
       next: this.navigateToCity,
-      error: this.errorHandler
+      error: e => {
+        this.errorState.riseError({
+          problem: 'Oops! An error occured trying to detect your city:',
+          message: e.message,
+          advice: 'Please, press "another city" and type the city name you need'
+        });
+        this.navigateToCity(GeolocationService.DEFAULT_CITY);
+      }
     });
   }
 
@@ -73,30 +76,6 @@ export class TopBarComponent implements OnInit {
       this.showForm = false;
       this.city = city;
       this.observableCity.update(city);
-      this.title.setTitle(`Weather – ${city}`);
     }
-  };
-
-  private setCurrentConditionsData = (currentConditions: CurrentConditions): void => {
-    this.currentConditions = currentConditions;
-    const timezone = currentConditions.timezone;
-    this.time = formatDate(datetimeByTimezoneOffset(timezone.offset), 'HH:mm cccc', 'en-US');
-    this.timezone = timezone.name;
-  };
-
-
-  private reportError = (errorInfo: ErrorInfo): void => {
-    this.showError = true;
-    this.errorInfo = errorInfo;
-    setTimeout(() => this.showError = false, 10_000);
-  };
-
-  private errorHandler = (error: Error): void => {
-    this.errorState.riseError({
-      problem: 'Oops! An error occured trying to detect your city:',
-      message: error.message,
-      advice: 'Please, press "another city" and type the city name you need'
-    });
-    this.navigateToCity(GeolocationService.DEFAULT_CITY);
   };
 }

@@ -1,0 +1,6 @@
+    <div *ngIf="showError" class="error">
+      <div class="close" (click)="showError=false">X</div>
+      <p> {{ errorInfo?.problem }}</p>
+      <p class="message"> {{ errorInfo.message }} </p>
+      <p>{{ errorInfo?.advice }}</p>
+    </div>

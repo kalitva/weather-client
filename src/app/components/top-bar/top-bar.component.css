@@ -65,32 +65,6 @@
   opacity: 0.9;
 }
 
-.top-bar-fixed .top-bar .error {
-  position: absolute;
-  right: 0;
-  max-width: 50rem;
-  margin: 1rem 2rem;
-  padding: 1.5rem 3rem;
-  border-radius: 1rem;
-  font-size: 1.3rem;
-  line-height: 1.7rem;
-  background-color: rgba(255,255,255,0.1);
-}
-
-.top-bar-fixed .top-bar .error .message {
-  color: orange;
-  font-weight: var(--bold);
-}
-
-.top-bar-fixed .top-bar .error .close {
-  position: absolute;
-  top: 0.3rem;
-  right: 0.9rem;
-  font-weight: var(--bold);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }

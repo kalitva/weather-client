@@ -1,0 +1,26 @@
+.error {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 50rem;
+  margin: 1rem 2rem;
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
+  font-size: 1.3rem;
+  line-height: 1.7rem;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.error .message {
+  color: orange;
+  font-weight: var(--bold);
+}
+
+.error .close {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.9rem;
+  font-weight: var(--bold);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
