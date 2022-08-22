@@ -17,6 +17,7 @@ import { ResponseLoadingStateInterceptor } from './interceptors/response-loading
 import { CitySearchService } from './services/city-search.service';
 import { SpottCitySearchService } from './services/spott-city-search.service';
 import { ErrorAlertComponent } from './components/error-alert/error-alert.component';
+import { CityAutocompleteComponent } from './components/city-autocomplete/city-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ErrorAlertComponent } from './components/error-alert/error-alert.compon
     HoursComponent,
     DaysComponent,
     ErrorAlertComponent,
+    CityAutocompleteComponent,
   ],
   imports: [
     BrowserModule,

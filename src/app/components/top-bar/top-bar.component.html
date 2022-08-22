@@ -14,9 +14,13 @@
           *ngIf="showForm"
           (keypress)="restrictChars($event)"
           (keydown.enter)="navigateToCity(input_city.value.trim())"
-          (keydown.escape)="showForm=false"
-          (blur)="showForm=false"
+          (keydown.escape)="showForm=false; city_autocomplete.clear()"
+          (keydown.arrowDown)="city_autocomplete.moveDown()"
+          (keydown.arrowUp)="city_autocomplete.moveUp()"
+          (blur)="showForm=false; city_autocomplete.clear()"
+          (input)="city_autocomplete.triggerAutocomplete(input_city.value)"
       />
+      <app-city-autocomplete #city_autocomplete (onSelect)="setSuggestion($event)"></app-city-autocomplete>
       <div>
         <span class="time">{{ time }}</span>
         <span class="timezone">{{ currentConditions?.timezone?.name }}</span>

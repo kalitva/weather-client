@@ -9,10 +9,6 @@ import {
 import { Observable, of, tap } from 'rxjs';
 
 const DATE_AND_HOURS_LENGTH = 13;
-const resourcesToCache = [
-  'https://weather.visualcrossing.com/',
-  'https://trueway-geocoding.p.rapidapi.com/'
-];
 
 /*
  * The cache keeps http response for an hour
@@ -31,8 +27,7 @@ export class CacheHttpInterceptor implements HttpInterceptor {
     }
     return next.handle(request)
       .pipe(tap(event => {
-        const shouldBeCached = resourcesToCache.some(url => request.url.startsWith(url));
-        if (event instanceof HttpResponse && shouldBeCached) {
+        if (event instanceof HttpResponse) {
           this.setItem(hash, JSON.stringify(event));
         }
       }));

@@ -1,0 +1,11 @@
+<div #autocomplete class="autocomplete">
+  <ul>
+    <li
+      class="item"
+      [ngClass]="{selected: i === selectedIndex}"
+      *ngFor="let city of suggestions; let i = index"
+    >
+      {{ city }}
+    </li>
+  </ul>
+</div>

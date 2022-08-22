@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ObservableCity } from 'src/app/state/observable-city';
 import { datetimeByTimezoneOffset } from 'src/app/util/datetime-util';
 import { GeolocationService } from 'src/app/services/geolocation.service';
@@ -16,6 +16,8 @@ import { ErrorState } from 'src/app/state/error-state';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
+  @ViewChild('input_city') inputCity: ElementRef;
+
   city: string;
   time: string;
   currentConditions: CurrentConditions;
@@ -50,6 +52,10 @@ export class TopBarComponent implements OnInit {
 
   restrictChars(event: KeyboardEvent): boolean {
     return /[\w|\-|\s]/.test(event.key);
+  }
+
+  setSuggestion(city: string): void {
+    this.inputCity.nativeElement.value = city;
   }
 
   private tryToDetectCity(): void {
