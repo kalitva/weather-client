@@ -4,13 +4,11 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
 import { Day } from '../model/day.model';
-import { Decoration } from '../model/decoration.enum';
 import { Hour } from '../model/hour.model';
+import { toCurrentConditionsMapper, toHoursForecastMapper, toNext10DaysForecastMapper } from '../util/mappers';
 import { WeatherApiService } from './weather-api.service';
 
 const API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
-const TODAY_INDEX = 0;
-const NEXT_DAY_INDEX = 1;
 
 type Options<T> = {
   url: string,
@@ -30,7 +28,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today`,
       include: 'current',
-      mapper: this.toCurrentConditionsMapper
+      mapper: toCurrentConditionsMapper,
     });
   }
 
@@ -38,12 +36,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next1days`,
       include: 'hours',
-      mapper: data => data.days.flatMap((d: any) => d.hours)
-        .map((h: any): Hour => ({
-          time: h.datetime.slice(0, -3), // cut seconds
-          temp: h.temp,
-          icon: h.icon
-        }))
+      mapper: toHoursForecastMapper,
     });
   }
 
@@ -51,20 +44,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`,
       include: 'days',
-      mapper: data => data.days.slice(NEXT_DAY_INDEX)
-        .map((d: any): Day => ({
-          description: d.description,
-          date: d.datetime,
-          icon: d.icon,
-          minTemp: d.tempmin,
-          maxTemp: d.tempmax,
-          feelsLike: d.feelslike,
-          humidity: d.humidity,
-          visibility: d.visibility,
-          uvIndex: d.uvindex,
-          windSpeed: d.windspeed,
-          pressure: d.pressure,
-        }))
+      mapper: toNext10DaysForecastMapper,
     });
   }
 
@@ -77,40 +57,4 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.httpClient.get(options.url, { params })
       .pipe(map(options.mapper));
   }
-
-  private toCurrentConditionsMapper(data: any): CurrentConditions {
-    const today = data.days[TODAY_INDEX];
-    return {
-      address: data.address,
-      summary: data.currentConditions.conditions,
-      temp: data.currentConditions.temp,
-      maxTemp: today.tempmax,
-      minTemp: today.tempmin,
-      feelsLike: data.currentConditions.feelslike,
-      description: today.description,
-      decoration: VisualCrossingWeatherApiService.decorationAdapter[data.currentConditions.icon],
-      icon: data.currentConditions.icon,
-      timezone: { name: data.timezone, offset: data.tzoffset },
-      windSpeed: data.currentConditions.windspeed,
-      cloudCover: data.currentConditions.cloudcover,
-      humidity: data.currentConditions.humidity,
-      pressure: data.currentConditions.pressure,
-      uvIndex: data.currentConditions.uvindex,
-    };
-  }
-
-  /*
-   * docs: https://www.visualcrossing.com/resources/documentation/weather-api/defining-icon-set-in-the-weather-api/
-   */
-  private static readonly decorationAdapter: { [key: string]: Decoration } = {
-    snow: Decoration.SNOW,
-    rain: Decoration.RAIN,
-    fog: Decoration.FOG,
-    wind: Decoration.WIND,
-    cloudy: Decoration.CLOUDY,
-    'partly-cloudy-day': Decoration.CLOUDY,
-    'partly-cloudy-night': Decoration.CLOUDY,
-    'clear-day': Decoration.CLEAR,
-    'clear-night': Decoration.CLEAR
-  };
 }
