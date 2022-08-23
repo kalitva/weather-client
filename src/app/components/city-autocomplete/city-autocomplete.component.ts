@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { City } from 'src/app/model/city.model';
 import { CitySearchService } from 'src/app/services/city-search.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { CitySearchService } from 'src/app/services/city-search.service';
 export class CityAutocompleteComponent {
   @Output() onSelect: EventEmitter<string>;
 
-  suggestions: string[];
+  suggestions: City[];
   selectedIndex: number;
+  closed: boolean; // for the case then response comes after user hit enter
 
   constructor(private citySearchService: CitySearchService) {
     this.onSelect = new EventEmitter();
@@ -18,14 +20,15 @@ export class CityAutocompleteComponent {
   }
 
   triggerAutocomplete = (query: string): void => {
+    this.closed = false;
     this.citySearchService.searchCity(query).subscribe({
       next: ss => {
-        this.suggestions = ss;
+        this.suggestions = (!this.closed) ? ss : [];
         if (this.selectedIndex >= ss.length) {
           this.selectedIndex = ss.length - 1;
         }
       },
-      error: this.clear,
+      error: () => this.clear(),
     });
   };
 
@@ -35,7 +38,9 @@ export class CityAutocompleteComponent {
     } else {
       this.selectedIndex = this.suggestions.length - 1;
     }
-    this.onSelect.emit(this.suggestions[this.selectedIndex]);
+    if (this.suggestions[this.selectedIndex]?.name) {
+      this.onSelect.emit(this.suggestions[this.selectedIndex].name);
+    }
   }
 
   moveDown(): void {
@@ -44,11 +49,14 @@ export class CityAutocompleteComponent {
     } else {
       this.selectedIndex = 0;
     }
-    this.onSelect.emit(this.suggestions[this.selectedIndex]);
+    if (this.suggestions[this.selectedIndex]?.name) {
+      this.onSelect.emit(this.suggestions[this.selectedIndex].name);
+    }
   }
 
   clear(): void {
     this.suggestions = [];
     this.selectedIndex = -1;
+    this.closed = true;
   }
 }

@@ -1,9 +1,10 @@
 .autocomplete {
   position: absolute;
+  z-index: 10;
   padding: 0.5rem 0;
   font-size: 1.5rem;
   color: #262626;
-  background-color: white;
+  background-color: rgba(255,255,255,0.9);
 }
 
 .autocomplete:focus {
@@ -11,8 +12,17 @@
 }
 
 .autocomplete .item {
+  display: flex;
+  justify-content: space-between;
+  min-width: 25rem;
   list-style-type: none;
   padding: 0 1rem;
+}
+
+.autocomplete .item .country {
+  padding-left: 2rem;
+  font-size: 1.1rem;
+  color: gray;
 }
 
 .autocomplete .selected {

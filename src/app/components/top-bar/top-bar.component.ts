@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ObservableCity } from 'src/app/state/observable-city';
 import { datetimeByTimezoneOffset } from 'src/app/util/datetime-util';
 import { GeolocationService } from 'src/app/services/geolocation.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
@@ -36,7 +36,14 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.tryToDetectCity();
-    this.activatedRout.queryParams.subscribe(this.updateCityByQueryParam);
+    this.activatedRout.queryParams.subscribe(params => {
+      const city = params['city'];
+      if (city) {
+        this.showForm = false;
+        this.city = city;
+        this.observableCity.update(city);
+      }
+    });
     this.observableCurrentConditions.onChange(cc => {
       this.currentConditions = cc;
       this.time = formatDate(datetimeByTimezoneOffset(cc.timezone.offset), 'HH:mm cccc', 'en-US');
@@ -75,13 +82,4 @@ export class TopBarComponent implements OnInit {
       }
     });
   }
-
-  private updateCityByQueryParam = (params: Params): void => {
-    const city = params['city'];
-    if (city) {
-      this.showForm = false;
-      this.city = city;
-      this.observableCity.update(city);
-    }
-  };
 }
