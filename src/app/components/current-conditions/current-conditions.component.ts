@@ -28,7 +28,7 @@ export class CurrentConditionsComponent implements OnInit {
       this.weatherApiService.currentConditions(c).subscribe({
         next: cc => {
           this.currentConditions = cc;
-          this.iconSrc = `assets/icons/${cc.icon}.svg`;
+          this.iconSrc = `assets/icons/conditions/${cc.icon}.svg`;
           this.observableCurrentConditions.update(cc);
         },
         error: e => {

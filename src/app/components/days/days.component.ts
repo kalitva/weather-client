@@ -28,6 +28,6 @@ export class DaysComponent implements OnInit {
   }
 
   iconSrc(icon: string): string {
-    return `assets/icons/${icon}.svg`;
+    return `assets/icons/conditions/${icon}.svg`;
   }
 }
