@@ -53,10 +53,17 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
       include: 'days',
       mapper: data => data.days.slice(NEXT_DAY_INDEX)
         .map((d: any): Day => ({
+          description: d.description,
           date: d.datetime,
           icon: d.icon,
           minTemp: d.tempmin,
-          maxTemp: d.tempmax
+          maxTemp: d.tempmax,
+          feelsLike: d.feelslike,
+          humidity: d.humidity,
+          visibility: d.visibility,
+          uvIndex: d.uvindex,
+          windSpeed: d.windspeed,
+          pressure: d.pressure,
         }))
     });
   }

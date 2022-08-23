@@ -1,11 +1,58 @@
 <ul class="days">
-  <li class="day" *ngFor="let day of days">
-    <div class="date">{{ formatDate(day.date) }}</div>
-    <div class="conditions">
-      <img class="icon" [src]="iconSrc(day.icon)" />
-      <div class="temp">
-        <p>↓{{ day.minTemp }}°</p>
-        <p>↑{{ day.maxTemp }}°</p>
+  <li class="item" *ngFor="let day of days; let i = index" (click)="toggleDay(i)">
+    <div class="summary">
+      <div class="date">{{ formatDate(day.date) }}</div>
+      <div *ngIf="!closedOpenDayState[i]" class="conditions">
+        <img class="icon" [src]="iconSrc(day.icon)" />
+        <div class="temp">
+          <p>↓{{ day.minTemp }}°</p>
+          <p>↑{{ day.maxTemp }}°</p>
+        </div>
+      </div>
+      <div class="description" *ngIf="closedOpenDayState[i]">{{ day.description }}</div>
+    </div>
+    <div class="details" *ngIf="closedOpenDayState[i]">
+      <img class="big-icon" [src]="iconSrc(day.icon)" />
+      <ul class="column">
+        <li class="row">
+          <span>Feels like:</span>
+          <span>{{ day.feelsLike }}°</span>
+        </li>
+        <li class="row">
+          <span>Humidity</span>
+          <span>{{ day.humidity }}%</span>
+        </li>
+        <li class="row">
+          <span>Visibility</span>
+          <span>{{ day.visibility }}km</span>
+        </li>
+        <li class="row">
+          <span>UV index</span>
+          <span>{{ day.uvIndex }}</span>
+        </li>
+      </ul>
+      <div class="column">
+        <div class="row">
+          <span>
+            <img src="assets/icons/wind.svg">
+            <label> Wind:</label>
+          </span>
+          <span>{{ day.windSpeed }} km/h</span>
+        </div>
+        <div class="row">
+          <span>
+            <img src="assets/icons/pressure.svg" />
+            <label> Presurre: </label>
+          </span>
+          <span>{{ day.pressure }} mBar</span>
+        </div>
+      </div>
+      <div class="column last">
+        <img class="thermometer" src="assets/icons/uv-index.svg" />
+        <div>
+          <div class="temp">↓ {{ day.minTemp }}°</div>
+          <div class="temp">↑ {{ day.maxTemp }}°</div>
+        </div>
       </div>
     </div>
   </li>
