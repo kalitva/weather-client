@@ -11,16 +11,13 @@ export class ErrorAlertComponent implements OnInit {
   showError: boolean;
   errorInfo: ErrorInfo;
 
-  constructor(private errorState: ErrorState) {
-  }
+  constructor(private errorState: ErrorState) {}
 
   ngOnInit(): void {
-    this.errorState.onError(this.reportError);
+    this.errorState.onError(ei => {
+      this.showError = true;
+      this.errorInfo = ei;
+      setTimeout(() => this.showError = false, 10_000);
+    });
   }
-
-  private reportError = (errorInfo: ErrorInfo): void => {
-    this.showError = true;
-    this.errorInfo = errorInfo;
-    setTimeout(() => this.showError = false, 10_000);
-  };
 }

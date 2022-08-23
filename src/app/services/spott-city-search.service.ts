@@ -7,8 +7,7 @@ import { CitySearchService } from './city-search.service';
 
 @Injectable()
 export class SpottCitySearchService implements CitySearchService {
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   searchCity(query: string): Observable<City[]> {
     const headers = {

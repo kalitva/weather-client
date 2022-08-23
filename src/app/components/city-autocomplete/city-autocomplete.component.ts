@@ -19,7 +19,7 @@ export class CityAutocompleteComponent {
     this.selectedIndex = -1;
   }
 
-  triggerAutocomplete = (query: string): void => {
+  triggerAutocomplete(query: string): void {
     this.closed = false;
     this.citySearchService.searchCity(query).subscribe({
       next: ss => {
@@ -30,7 +30,7 @@ export class CityAutocompleteComponent {
       },
       error: () => this.clear(),
     });
-  };
+  }
 
   moveUp(): void {
     if (this.selectedIndex > 0) {

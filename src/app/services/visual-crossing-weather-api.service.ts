@@ -8,26 +8,23 @@ import { Decoration } from '../model/decoration.enum';
 import { Hour } from '../model/hour.model';
 import { WeatherApiService } from './weather-api.service';
 
-/*
- * resource: https://www.visualcrossing.com/
- * timeline api: https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/
- */
+const API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
+const TODAY_INDEX = 0;
+const NEXT_DAY_INDEX = 1;
 
-interface Options<T> {
+type Options<T> = {
   url: string,
   include: string,
   mapper: (data: any) => T
 }
 
+/*
+ * resource: https://www.visualcrossing.com/
+ * timeline api: https://www.visualcrossing.com/resources/documentation/weather-api/timeline-weather-api/
+ */
 @Injectable()
 export class VisualCrossingWeatherApiService implements WeatherApiService {
-  private static readonly API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
-
-  private static readonly TODAY_INDEX = 0;
-  private static readonly NEXT_DAY_INDEX = 1;
-
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   currentConditions(city: string): Observable<CurrentConditions> {
     return this.doGet({
@@ -54,7 +51,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.doGet({
       url: `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next10days`,
       include: 'days',
-      mapper: data => data.days.slice(VisualCrossingWeatherApiService.NEXT_DAY_INDEX)
+      mapper: data => data.days.slice(NEXT_DAY_INDEX)
         .map((d: any): Day => ({
           date: d.datetime,
           icon: d.icon,
@@ -66,7 +63,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
 
   private doGet<T>(options: Options<T>): Observable<T> {
     const params = {
-      key: VisualCrossingWeatherApiService.API_KEY,
+      key: API_KEY,
       unitGroup: 'metric',
       include: options.include
     };
@@ -75,7 +72,7 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   }
 
   private toCurrentConditionsMapper(data: any): CurrentConditions {
-    const today = data.days[VisualCrossingWeatherApiService.TODAY_INDEX];
+    const today = data.days[TODAY_INDEX];
     return {
       address: data.address,
       summary: data.currentConditions.conditions,

@@ -16,17 +16,27 @@ export class CurrentConditionsComponent implements OnInit {
   currentConditions: CurrentConditions;
   iconSrc: string;
 
-  constructor(private weatherApiService: WeatherApiService,
-              private observableCity: ObservableCity,
-              private observableCurrentConditions: ObservableCurrentConditions,
-              private errorState: ErrorState) {
-  }
+  constructor(
+    private weatherApiService: WeatherApiService,
+    private observableCity: ObservableCity,
+    private observableCurrentConditions: ObservableCurrentConditions,
+    private errorState: ErrorState
+  ) {}
 
   ngOnInit(): void {
     this.observableCity.onChanged(c => {
       this.weatherApiService.currentConditions(c).subscribe({
-        next: this.setCurrentConditionsData,
-        error: this.errorHandler
+        next: cc => {
+          this.currentConditions = cc;
+          this.iconSrc = `assets/icons/${cc.icon}.svg`;
+          this.observableCurrentConditions.update(cc);
+        },
+        error: e => {
+          this.errorState.riseError({
+            problem: 'Oops! An error ocurred trying to get current weather:',
+            message: e instanceof HttpErrorResponse ? (e as HttpErrorResponse).error : e.message
+          });
+        },
       });
     });
   }
@@ -34,19 +44,4 @@ export class CurrentConditionsComponent implements OnInit {
   uvIndexScale(uvIndex: number | undefined): string {
     return uvIndexScale(uvIndex ?? 0);
   }
-
-  private setCurrentConditionsData = (currentConditions: CurrentConditions): void => {
-    this.currentConditions = currentConditions;
-    this.iconSrc = `assets/icons/${currentConditions.icon}.svg`;
-    this.observableCurrentConditions.update(currentConditions);
-  };
-
-  private errorHandler = (error: Error): void => {
-    this.errorState.riseError({
-      problem: 'Oops! An error ocurred trying to get current weather:',
-      message: error instanceof HttpErrorResponse
-        ? (error as HttpErrorResponse).error
-        : error.message
-    });
-  };
 }

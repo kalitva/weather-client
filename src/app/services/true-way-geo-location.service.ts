@@ -9,8 +9,7 @@ import { GeolocationService } from './geolocation.service';
  */
 @Injectable()
 export class TrueWayGeolocationService implements GeolocationService {
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   detectCity(): Observable<string> {
     const url = 'https://trueway-geocoding.p.rapidapi.com/ReverseGeocode';

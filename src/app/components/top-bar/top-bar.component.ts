@@ -32,7 +32,7 @@ export class TopBarComponent implements OnInit {
     private errorState: ErrorState,
     private observableCity: ObservableCity,
     private observableCurrentConditions: ObservableCurrentConditions,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.tryToDetectCity();
@@ -51,11 +51,11 @@ export class TopBarComponent implements OnInit {
     this.loadingState.onChange(bl => this.beingLoaded = bl);
   }
 
-  navigateToCity = (city: string): void => {
+  navigateToCity(city: string): void {
     if (city) {
       this.router.navigate([], { queryParams: { city } });
     }
-  };
+  }
 
   restrictChars(event: KeyboardEvent): boolean {
     return /[\w|\-|\s]/.test(event.key);
@@ -71,7 +71,7 @@ export class TopBarComponent implements OnInit {
       return;
     }
     this.geolocationService.detectCity().subscribe({
-      next: this.navigateToCity,
+      next: c => this.navigateToCity(c),
       error: e => {
         this.errorState.riseError({
           problem: 'Oops! An error occured trying to detect your city:',

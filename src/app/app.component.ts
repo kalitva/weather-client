@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { CurrentConditions } from './model/current-conditions.model';
 import { LoadingState } from './state/loading-state';
 import { ObservableCity } from './state/observable-city';
 import { ObservableCurrentConditions } from './state/observable-current-conditions';
@@ -28,13 +27,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.observableCity.onChanged(c => this.title.setTitle(`Weather – ${c}`));
-    this.observableCurrentConditions.onChange(this.updateDecoration);
+    this.observableCurrentConditions.onChange(cc => {
+      const timeOfDay = timeOfDayByTimezoneOffset(cc.timezone.offset);
+      this.backgroundUrl = `url(assets/bg/${timeOfDay}/${cc.decoration}.jpg)`;
+      this.visorColorClass = `visor-color-${cc.decoration}`;
+    });
     this.loadingState.onChange(bl => this.beingLoaded = bl);
   }
-
-  private updateDecoration = (currentConditions: CurrentConditions): void => {
-    const timeOfDay = timeOfDayByTimezoneOffset(currentConditions.timezone.offset);
-    this.backgroundUrl = `url(assets/bg/${timeOfDay}/${currentConditions.decoration}.jpg)`;
-    this.visorColorClass = `visor-color-${currentConditions.decoration}`;
-  };
 }
