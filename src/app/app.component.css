@@ -1,65 +1,3 @@
-.visor-color-default {
-  background-color: rgba(0,0,0,0.1);
-}
-
-.visor-color-clear {
-  background-color: rgba(5,49,99, 0.3);
-}
-
-.visor-color-rain {
-  background-color: rgba(9,43,69, 0.3);
-}
-
-.visor-color-cloudy {
-  background-color: rgba(20,60,80, 0.3);
-}
-
-.visor-color-fog {
-  background-color: rgba(0,0,0, 0.2);
-}
-
-.visor-color-wind {
-  background-color: rgba(12,67,19, 0.1);
-}
-
-.visor-color-snow {
-  background-color: rgba(50,50,50, 0.3);
-}
-
-.background-back {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background-size: 100% auto;
-  filter: blur(50px);
-  transition: all 1s;
-}
-
-.background-front {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-size: 100% auto;
-}
-
-.top-visor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 11rem;
-  font-size: 2rem;
-}
-
-.fixed-frame {
-  position: fixed;
-  left: 0;
-  right: 0;
-  width: var(--screen-width);
-  height: 100%;
-  margin: 0 auto;
-}
-
 .content {
   z-index: 2;
   font-family: 'Montserrat', sans-serif;
@@ -75,7 +13,7 @@
   display: none;
 }
 
-.content .today {
+.content .current-conditions {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

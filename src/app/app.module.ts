@@ -18,6 +18,7 @@ import { CitySearchService } from './services/city-search.service';
 import { ErrorAlertComponent } from './components/error-alert/error-alert.component';
 import { CityAutocompleteComponent } from './components/city-autocomplete/city-autocomplete.component';
 import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.service';
+import { BackgroundComponent } from './components/background/background.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.
     DaysComponent,
     ErrorAlertComponent,
     CityAutocompleteComponent,
+    BackgroundComponent,
   ],
   imports: [
     BrowserModule,

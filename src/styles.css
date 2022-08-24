@@ -16,3 +16,12 @@
 html, body {
   height: 100%;
 }
+
+.fixed-frame {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: var(--screen-width);
+  height: 100%;
+  margin: 0 auto;
+}

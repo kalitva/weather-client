@@ -24,10 +24,10 @@ export class GeoapifyCitySearchService implements CitySearchService {
         name: f.properties.city,
         country: f.properties.country
       }))))
-      .pipe(map(this.filterByNullAndUniqueCountry));
+      .pipe(map(this.filterByNotNullAndUniqueName));
   }
 
-  private filterByNullAndUniqueCountry(cities: City[]): City[] {
+  private filterByNotNullAndUniqueName(cities: City[]): City[] {
     return [...new Map(cities.reverse().map(c => [c.name, c])).values()]
       .filter(c => c.name);
   }
