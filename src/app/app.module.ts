@@ -15,9 +15,9 @@ import { DaysComponent } from './components/days/days.component';
 import { FormsModule } from '@angular/forms';
 import { ResponseLoadingStateInterceptor } from './interceptors/response-loading-state.interceptor';
 import { CitySearchService } from './services/city-search.service';
-import { SpottCitySearchService } from './services/impl/spott-city-search.service';
 import { ErrorAlertComponent } from './components/error-alert/error-alert.component';
 import { CityAutocompleteComponent } from './components/city-autocomplete/city-autocomplete.component';
+import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { CityAutocompleteComponent } from './components/city-autocomplete/city-a
   providers: [
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
     { provide: GeolocationService, useClass: TrueWayGeolocationService },
-    { provide: CitySearchService, useClass: SpottCitySearchService },
+    { provide: CitySearchService, useClass: GeoapifyCitySearchService },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseLoadingStateInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
   ],
