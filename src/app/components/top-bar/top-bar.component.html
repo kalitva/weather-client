@@ -6,28 +6,33 @@
       </svg>
     </div>
     <h2 class="summary">
-      <p *ngIf="!showForm">{{ city }}</p>
+      <p *ngIf="!showInput">{{ city }}</p>
       <input
           #input_city
           id="input-city"
           class="input-city"
-          *ngIf="showForm"
+          *ngIf="showInput"
           (keypress)="restrictChars($event)"
           (keydown.enter)="navigateToCity(input_city.value.trim())"
-          (keydown.escape)="showForm=false; city_autocomplete.clear()"
+          (keydown.escape)="closeInput()"
           (keydown.arrowDown)="city_autocomplete.moveDown()"
           (keydown.arrowUp)="city_autocomplete.moveUp()"
-          (blur)="showForm=false; city_autocomplete.clear()"
+          (blur)="closeInput()"
           (input)="city_autocomplete.triggerAutocomplete(input_city.value)"
       />
-      <app-city-autocomplete #city_autocomplete (onSelect)="setSuggestion($event)"></app-city-autocomplete>
+      <app-city-autocomplete
+          #city_autocomplete
+          (onMove)="setSuggestion($event)"
+          (onSelect)="navigateToCity($event)"
+      >
+      </app-city-autocomplete>
       <div>
         <span class="time">{{ time }}</span>
         <span class="timezone">{{ currentConditions?.timezone?.name }}</span>
       </div>
       <p class="description">{{ currentConditions?.description }}</p>
     </h2>
-    <label class="another-city" for="input-city" (click)="showForm=true">
+    <label class="another-city" for="input-city" (click)="showInput=true">
       <span>another city</span>
     </label>
     <app-error-alert></app-error-alert>

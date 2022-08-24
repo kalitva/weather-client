@@ -17,6 +17,7 @@
   min-width: 25rem;
   list-style-type: none;
   padding: 0 1rem;
+  cursor: pointer;
 }
 
 .autocomplete .item .country {

@@ -9,6 +9,9 @@ import { ObservableCurrentConditions } from 'src/app/state/observable-current-co
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { LoadingState } from 'src/app/state/loading-state';
 import { ErrorState } from 'src/app/state/error-state';
+import { CityAutocompleteComponent } from '../city-autocomplete/city-autocomplete.component';
+
+const DELAY_BEFORE_CLOSE_INPUT = 200;
 
 @Component({
   selector: 'app-top-bar',
@@ -16,12 +19,13 @@ import { ErrorState } from 'src/app/state/error-state';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
+  @ViewChild('city_autocomplete') cityAutocomplete: CityAutocompleteComponent;
   @ViewChild('input_city') inputCity: ElementRef;
 
   city: string;
   time: string;
   currentConditions: CurrentConditions;
-  showForm: boolean;
+  showInput: boolean;
   beingLoaded: boolean;
 
   constructor(
@@ -39,7 +43,7 @@ export class TopBarComponent implements OnInit {
     this.activatedRout.queryParams.subscribe(params => {
       const city = params['city'];
       if (city) {
-        this.showForm = false;
+        this.showInput = false;
         this.city = city;
         this.observableCity.update(city);
       }
@@ -57,12 +61,20 @@ export class TopBarComponent implements OnInit {
     }
   }
 
+  // TODO fix - this permits only the latin symbols
   restrictChars(event: KeyboardEvent): boolean {
     return /[\w|\-|\s]/.test(event.key);
   }
 
   setSuggestion(city: string): void {
     this.inputCity.nativeElement.value = city;
+  }
+
+  closeInput(): void {
+    setTimeout(() => { // to be able click before input is closed
+      this.showInput = false;
+      this.cityAutocomplete.clear();
+    }, DELAY_BEFORE_CLOSE_INPUT);
   }
 
   private tryToDetectCity(): void {

@@ -8,6 +8,7 @@ import { CitySearchService } from 'src/app/services/city-search.service';
   styleUrls: ['./city-autocomplete.component.css']
 })
 export class CityAutocompleteComponent {
+  @Output() onMove: EventEmitter<string>;
   @Output() onSelect: EventEmitter<string>;
 
   suggestions: City[];
@@ -15,6 +16,7 @@ export class CityAutocompleteComponent {
   closed: boolean; // for the case then response comes after user hit enter
 
   constructor(private citySearchService: CitySearchService) {
+    this.onMove = new EventEmitter();
     this.onSelect = new EventEmitter();
     this.selectedIndex = -1;
   }
@@ -39,7 +41,7 @@ export class CityAutocompleteComponent {
       this.selectedIndex = this.suggestions.length - 1;
     }
     if (this.suggestions[this.selectedIndex]?.name) {
-      this.onSelect.emit(this.suggestions[this.selectedIndex].name);
+      this.onMove.emit(this.suggestions[this.selectedIndex].name);
     }
   }
 
@@ -50,7 +52,7 @@ export class CityAutocompleteComponent {
       this.selectedIndex = 0;
     }
     if (this.suggestions[this.selectedIndex]?.name) {
-      this.onSelect.emit(this.suggestions[this.selectedIndex].name);
+      this.onMove.emit(this.suggestions[this.selectedIndex].name);
     }
   }
 

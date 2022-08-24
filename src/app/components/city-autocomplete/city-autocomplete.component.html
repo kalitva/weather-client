@@ -1,9 +1,11 @@
-<div #autocomplete class="autocomplete">
+<div class="autocomplete">
   <ul>
     <li
         class="item"
         [ngClass]="{selected: i === selectedIndex}"
         *ngFor="let city of suggestions; let i = index"
+        (click)="onSelect.emit(city.name)"
+        (mouseover)="selectedIndex = i"
     >
       <span>{{ city.name }}</span>
       <span class="country">{{ city.country }}</span>
