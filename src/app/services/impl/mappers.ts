@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CurrentConditions } from '../model/current-conditions.model';
-import { Day } from '../model/day.model';
-import { Decoration } from '../model/decoration.enum';
-import { Hour } from '../model/hour.model';
+import { CurrentConditions } from '../../model/current-conditions.model';
+import { Day } from '../../model/day.model';
+import { Decoration } from '../../model/decoration.enum';
+import { Hour } from '../../model/hour.model';
 
 const NEXT_DAY_INDEX = 1;
 const TODAY_INDEX = 0;

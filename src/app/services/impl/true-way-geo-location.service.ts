@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from, firstValueFrom } from 'rxjs';
-import { GeolocationService } from './geolocation.service';
+import { GeolocationService } from '../geolocation.service';
 
 /*
  * docs: https://rapidapi.com/trueway/api/trueway-geocoding/

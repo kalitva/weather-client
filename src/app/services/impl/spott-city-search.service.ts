@@ -2,9 +2,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { City } from '../model/city.model';
-import { CitySearchService } from './city-search.service';
+import { City } from '../../model/city.model';
+import { CitySearchService } from '../city-search.service';
 
+/*
+ * resource: https://rapidapi.com/Spott/api/spott
+ */
 @Injectable()
 export class SpottCitySearchService implements CitySearchService {
   constructor(private httpClient: HttpClient) {}

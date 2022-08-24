@@ -2,11 +2,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { CurrentConditions } from '../model/current-conditions.model';
-import { Day } from '../model/day.model';
-import { Hour } from '../model/hour.model';
-import { toCurrentConditionsMapper, toHoursForecastMapper, toNext10DaysForecastMapper } from '../util/mappers';
-import { WeatherApiService } from './weather-api.service';
+import { CurrentConditions } from '../../model/current-conditions.model';
+import { Day } from '../../model/day.model';
+import { Hour } from '../../model/hour.model';
+import { toCurrentConditionsMapper, toHoursForecastMapper, toNext10DaysForecastMapper } from './mappers';
+import { WeatherApiService } from '../weather-api.service';
 
 const API_KEY = 'KSFB4RN84XSRFBWTBHHW9359R';
 
