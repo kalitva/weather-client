@@ -71,7 +71,7 @@ export class TopBarComponent implements OnInit {
   }
 
   closeInput(): void {
-    setTimeout(() => { // to be able click before input is closed
+    setTimeout(() => { // to be able click on autocomplete elem before input is closed
       this.showInput = false;
       this.cityAutocomplete.clear();
     }, DELAY_BEFORE_CLOSE_INPUT);

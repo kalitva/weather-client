@@ -21,6 +21,7 @@ export class CityAutocompleteComponent {
     this.selectedIndex = -1;
   }
 
+  // TODO cancel request on a new call
   triggerAutocomplete(query: string): void {
     this.closed = false;
     this.citySearchService.searchCity(query).subscribe({

@@ -1,5 +1,4 @@
 .top-bar-fixed {
-  position: fixed;
   width: var(--screen-width);
 }
 
