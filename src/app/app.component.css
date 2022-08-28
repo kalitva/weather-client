@@ -9,6 +9,10 @@
   -ms-overflow-style: none;
 }
 
+.content .spinner {
+  text-align: center;
+}
+
 .content::-webkit-scrollbar {
   display: none;
 }

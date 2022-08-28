@@ -57,4 +57,8 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
     return this.httpClient.get(options.url, { params })
       .pipe(map(options.mapper));
   }
+
+  getOrigin(): string {
+    return 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services';
+  }
 }

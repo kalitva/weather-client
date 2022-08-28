@@ -27,7 +27,7 @@ export class HoursComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    this.observableCity.onChanged(c => {
+    this.observableCity.onChange(c => {
       this.weatherApiService.hoursForecast(c).subscribe(hf => this.hours = hf);
     });
     this.observableCurrentConditions.onChange(cc => {

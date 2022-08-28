@@ -7,31 +7,23 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { catchError, Observable, tap } from 'rxjs';
-import { LoadingState } from '../state/loading-state';
+import { LoadingStateManager } from '../state/loading-state-manager';
 
 @Injectable()
 export class ResponseLoadingStateInterceptor implements HttpInterceptor {
-  private waitingRequests: number;
-
-  constructor(private loadingState: LoadingState) {
-    this.waitingRequests = 0;
-  }
+  constructor(private loadingStateManager: LoadingStateManager) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.loadingState.update(true);
-    this.waitingRequests++;
+    this.loadingStateManager.update(request.url, true);
     return next.handle(request)
-      .pipe(catchError(this.errorHandler))
+      .pipe(catchError(e => {
+        this.loadingStateManager.update(request.url, false);
+        throw e;
+      }))
       .pipe(tap(event => {
         if (event instanceof HttpResponse) {
-          this.loadingState.update(!!(--this.waitingRequests));
+          this.loadingStateManager.update(request.url, false);
         }
       }));
   }
-
-  private errorHandler = (error: Error): Observable<HttpEvent<unknown>> => {
-    this.loadingState.update(false);
-    this.waitingRequests = 0;
-    throw error;
-  };
 }

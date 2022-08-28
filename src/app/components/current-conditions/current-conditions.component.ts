@@ -24,7 +24,7 @@ export class CurrentConditionsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.observableCity.onChanged(c => {
+    this.observableCity.onChange(c => {
       this.weatherApiService.currentConditions(c).subscribe({
         next: cc => {
           this.currentConditions = cc;

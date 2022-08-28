@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { LoadingState } from './state/loading-state';
+import { WeatherApiService } from './services/weather-api.service';
+import { LoadingStateManager } from './state/loading-state-manager';
 import { ObservableCity } from './state/observable-city';
+import { State } from './state/state';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +11,22 @@ import { ObservableCity } from './state/observable-city';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  beingLoaded: boolean;
+  weatherBeingLoaded: boolean;
+
+  private readonly weatherLoadingState: State<boolean>;
 
   constructor(
-    private loadingState: LoadingState,
     private observableCity: ObservableCity,
     private title: Title,
+    weatherService: WeatherApiService,
+    loadingStateManager: LoadingStateManager,
   ) {
-    this.beingLoaded = true;
+    this.weatherBeingLoaded = true;
+    this.weatherLoadingState = loadingStateManager.getStateByKey(weatherService.getOrigin());
   }
 
   ngOnInit(): void {
-    this.observableCity.onChanged(c => this.title.setTitle(`Weather – ${c}`));
-    this.loadingState.onChange(bl => this.beingLoaded = bl);
+    this.observableCity.onChange(c => this.title.setTitle(`Weather – ${c}`));
+    this.weatherLoadingState.onChange(bl => this.weatherBeingLoaded = bl);
   }
 }

@@ -23,7 +23,7 @@ export class DaysComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.observableCity.onChanged(c => {
+    this.observableCity.onChange(c => {
       this.weatherApiService.next10DaysForecast(c).subscribe(df => this.days = df);
     });
   }

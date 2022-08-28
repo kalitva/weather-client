@@ -28,4 +28,9 @@ export class TrueWayGeolocationService implements GeolocationService {
         .catch(e => { throw e; })
     );
   }
+
+  getOrigin(): string {
+    return 'https://trueway-geocoding.p.rapidapi.com/ReverseGeocode';
+  }
 }
+

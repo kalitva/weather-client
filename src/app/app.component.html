@@ -2,9 +2,12 @@
 <div class="content fixed-frame">
   <div class="current-conditions">
     <app-top-bar></app-top-bar>
-    <app-current-conditions [hidden]="beingLoaded"></app-current-conditions>
+    <div class="spinner" *ngIf="weatherBeingLoaded">
+      <img src="assets/spinner.svg" />
+    </div>
+    <app-current-conditions></app-current-conditions>
   </div>
-  <div class="forecast" [hidden]="beingLoaded">
+  <div class="forecast">
     <h2 class="header">Forecast</h2>
     <app-hours></app-hours>
     <app-days></app-days>

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
+import { State } from './state';
 
 @Injectable({ providedIn: 'root' })
-export class ObservableCurrentConditions {
+export class ObservableCurrentConditions implements State<CurrentConditions> {
   private readonly subject: Subject<CurrentConditions>;
 
   constructor() {

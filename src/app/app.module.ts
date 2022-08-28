@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,9 @@ import { ErrorAlertComponent } from './components/error-alert/error-alert.compon
 import { CityAutocompleteComponent } from './components/city-autocomplete/city-autocomplete.component';
 import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.service';
 import { BackgroundComponent } from './components/background/background.component';
+import { OriginAware } from './services/origin-aware';
+
+export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { BackgroundComponent } from './components/background/background.componen
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
     { provide: GeolocationService, useClass: TrueWayGeolocationService },
     { provide: CitySearchService, useClass: GeoapifyCitySearchService },
+    { provide: ORIGIN_AWARES, useClass: VisualCrossingWeatherApiService, multi: true },
+    { provide: ORIGIN_AWARES, useClass: TrueWayGeolocationService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseLoadingStateInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
   ],

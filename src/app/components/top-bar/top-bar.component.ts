@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
-import { LoadingState } from 'src/app/state/loading-state';
+import { LoadingStateManager } from 'src/app/state/loading-state-manager';
 import { ErrorState } from 'src/app/state/error-state';
 import { CityAutocompleteComponent } from '../city-autocomplete/city-autocomplete.component';
+import { State } from 'src/app/state/state';
 
 const DELAY_BEFORE_CLOSE_INPUT = 200;
 
@@ -28,15 +29,19 @@ export class TopBarComponent implements OnInit {
   showInput: boolean;
   beingLoaded: boolean;
 
+  private readonly loadingState: State<boolean>;
+
   constructor(
     private geolocationService: GeolocationService,
     private router: Router,
     private activatedRout: ActivatedRoute,
-    private loadingState: LoadingState,
     private errorState: ErrorState,
     private observableCity: ObservableCity,
     private observableCurrentConditions: ObservableCurrentConditions,
-  ) {}
+    loadingStateManager: LoadingStateManager,
+  ) {
+    this.loadingState = loadingStateManager.getStateByKey(geolocationService.getOrigin());
+  }
 
   ngOnInit(): void {
     this.tryToDetectCity();
