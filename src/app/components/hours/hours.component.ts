@@ -13,7 +13,6 @@ const HOUR_CONTAINER_WIDTH = 90 + 6.5;
   styleUrls: ['./hours.component.css']
 })
 export class HoursComponent implements OnInit, AfterViewChecked {
-  // TODO try to implement draggable scroll
   @ViewChild('slider') slider: ElementRef;
 
   hours: Hour[];

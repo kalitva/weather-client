@@ -18,6 +18,8 @@
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "@typescript-eslint/no-extra-semi": "warn",
     "object-shorthand": "warn",
     "object-curly-spacing": ["warn", "always"],
     "comma-spacing": ["warn", { "before": false, "after": true }],
@@ -35,6 +37,7 @@
     "indent": ["warn", 2],
     "linebreak-style": ["warn", "unix"],
     "quotes": ["warn", "single"],
-    "semi": ["warn", "always"]
+    "semi": ["warn", "always"],
+    "no-empty": "warn"
   }
 }
