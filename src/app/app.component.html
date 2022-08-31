@@ -5,7 +5,7 @@
     <div class="spinner" *ngIf="weatherBeingLoaded">
       <img src="assets/spinner.svg" />
     </div>
-    <app-current-conditions></app-current-conditions>
+    <app-current-conditions [ngStyle]="{'opacity': weatherBeingLoaded ? 0 : 1}"></app-current-conditions>
   </div>
   <div class="forecast">
     <h2 class="header">Forecast</h2>

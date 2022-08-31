@@ -12,7 +12,7 @@ import { ErrorState } from 'src/app/state/error-state';
 import { CityAutocompleteComponent } from '../city-autocomplete/city-autocomplete.component';
 import { State } from 'src/app/state/state';
 
-const DELAY_BEFORE_CLOSE_INPUT = 200;
+const DELAY_BEFORE_CLOSE_INPUT = 300;
 
 @Component({
   selector: 'app-top-bar',
@@ -27,9 +27,7 @@ export class TopBarComponent implements OnInit {
   time: string;
   currentConditions: CurrentConditions;
   showInput: boolean;
-  beingLoaded: boolean;
-
-  private readonly loadingState: State<boolean>;
+  cityBeingLoaded: boolean;
 
   constructor(
     private geolocationService: GeolocationService,
@@ -38,10 +36,8 @@ export class TopBarComponent implements OnInit {
     private errorState: ErrorState,
     private observableCity: ObservableCity,
     private observableCurrentConditions: ObservableCurrentConditions,
-    loadingStateManager: LoadingStateManager,
-  ) {
-    this.loadingState = loadingStateManager.getStateByKey(geolocationService.getOrigin());
-  }
+    private loadingStateManager: LoadingStateManager,
+  ) {}
 
   ngOnInit(): void {
     this.tryToDetectCity();
@@ -57,7 +53,8 @@ export class TopBarComponent implements OnInit {
       this.currentConditions = cc;
       this.time = formatDate(datetimeByTimezoneOffset(cc.timezone.offset), 'HH:mm cccc', 'en-US');
     });
-    this.loadingState.onChange(bl => this.beingLoaded = bl);
+    this.loadingStateManager.getStateByKey(this.geolocationService.getOrigin())
+      .onChange(bl => this.cityBeingLoaded = bl);
   }
 
   navigateToCity(city: string): void {
@@ -91,7 +88,7 @@ export class TopBarComponent implements OnInit {
       next: c => this.navigateToCity(c),
       error: e => {
         this.errorState.riseError({
-          problem: 'Oops! An error occured trying to detect your city:',
+          problem: 'An error occured trying to detect your city:',
           message: e.message,
           advice: 'Please, press "another city" and type the city name you need'
         });

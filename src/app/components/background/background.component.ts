@@ -11,7 +11,9 @@ export class BackgroundComponent implements OnInit {
   backgroundUrl: string;
   visorColorClass: string;
 
-  constructor(private observableCurrentConditions: ObservableCurrentConditions) {}
+  constructor(private observableCurrentConditions: ObservableCurrentConditions) {
+    this.backgroundUrl = 'url(assets/bg/default.jpg)';
+  }
 
   ngOnInit(): void {
     this.observableCurrentConditions.onChange(cc => {
