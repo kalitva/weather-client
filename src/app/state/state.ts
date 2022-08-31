@@ -1,6 +1,17 @@
-export interface State<S> {
+import { Subject } from 'rxjs';
 
-  update(subject: S): void;
+export abstract class State<S> {
+  private readonly subject: Subject<S>;
 
-  onChange(subscriber: (subject: S) => void): void;
+  constructor() {
+    this.subject = new Subject;
+  }
+
+  update(newValue: S): void {
+    this.subject.next(newValue);
+  }
+
+  onChange(subscriber: (newValue: S) => void): void {
+    this.subject.subscribe(subscriber);
+  }
 }
