@@ -1,13 +1,14 @@
 <app-background></app-background>
 <div class="content fixed-frame">
-  <div class="current-conditions">
+  <div class="weather-today">
     <app-top-bar></app-top-bar>
     <div class="spinner" *ngIf="weatherBeingLoaded">
       <img src="assets/spinner.svg" />
     </div>
-    <app-current-conditions [ngStyle]="{'opacity': weatherBeingLoaded ? 0 : 1}"></app-current-conditions>
+    <app-current-conditions [ngClass]="{'hidden': weatherBeingLoaded}"></app-current-conditions>
   </div>
   <div class="forecast">
+    <app-details class="details"></app-details>
     <h2 class="header">Forecast</h2>
     <app-hours></app-hours>
     <app-days></app-days>

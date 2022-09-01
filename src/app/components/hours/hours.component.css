@@ -37,3 +37,19 @@
 .hours .hour .temp {
   font-size: 1.4rem;
 }
+
+@media screen and (max-width: 600px) {
+  .hours .hour {
+    min-width: 8rem;
+    min-height: 8rem;
+  }
+
+  .hours .hour .icon {
+    width: 5rem;
+    margin: -1rem;
+  }
+
+  .hours .hour .temp {
+    font-size: 1.35rem;
+  }
+}

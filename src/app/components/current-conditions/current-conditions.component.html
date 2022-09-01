@@ -1,67 +1,6 @@
 <section class="current-conditions">
-  <div class="left-section">
-    <div class="row">
-      <div>
-        <img src="assets/icons/feels-like.svg" />
-        <span class="label">Feels like:</span>
-      </div>
-      <div>
-        <span class="value">{{ currentConditions?.feelsLike }}</span>
-        <span class="metric">°</span>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <img src="assets/icons/pressure.svg" />
-        <span class="label">Pressure:</span>
-      </div>
-      <div>
-        <span class="value">{{ currentConditions?.pressure }}</span>
-        <span class="metric">mBar</span>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <img src="assets/icons/humidity.svg" />
-        <span class="label">Humidity:</span>
-      </div>
-      <div>
-        <span class="value">{{ currentConditions?.humidity }}</span>
-        <span class="metric">%</span>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <img src="assets/icons/cloudcover.svg" />
-        <span class="label">Cloudcover:</span>
-      </div>
-      <div>
-        <span class="value">{{ currentConditions?.cloudCover }}</span>
-        <span class="metric">%</span>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <img src="assets/icons/wind.svg" />
-        <span class="label">Wind:</span>
-      </div>
-      <div>
-        <span class="value">{{ currentConditions?.windSpeed }}</span>
-        <span class="metric">km/h</span>
-      </div>
-    </div>
-    <div class="row">
-      <div>
-        <img src="assets/icons/uv-index.svg" />
-        <span class="label">UV Index:</span>
-      </div>
-      <div>
-        <span class="value">{{ currentConditions?.uvIndex }}</span>
-        <span class="metric">({{ uvIndexScale(currentConditions?.uvIndex) }})</span>
-      </div>
-    </div>
-  </div>
-  <div class="right-section">
+  <app-details class="details"></app-details>
+  <div class="overview">
     <div class="min-max-temp">
       <span>↓ {{ currentConditions?.minTemp }}°</span>
         &nbsp;

@@ -20,6 +20,7 @@ import { CityAutocompleteComponent } from './components/city-autocomplete/city-a
 import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.service';
 import { BackgroundComponent } from './components/background/background.component';
 import { OriginAware } from './services/origin-aware';
+import { DetailsComponent } from './components/details/details.component';
 
 export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
 
@@ -33,6 +34,7 @@ export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
     ErrorAlertComponent,
     CityAutocompleteComponent,
     BackgroundComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

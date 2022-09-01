@@ -21,7 +21,7 @@ html, body {
   position: fixed;
   left: 0;
   right: 0;
-  width: var(--screen-width);
+  max-width: var(--screen-width);
   height: 100%;
   margin: 0 auto;
 }

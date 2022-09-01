@@ -1,5 +1,5 @@
 .top-bar-fixed {
-  width: var(--screen-width);
+  max-width: var(--screen-width);
 }
 
 .top-bar-fixed .top-bar {
@@ -67,4 +67,15 @@
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+
+@media screen and (max-width: 600px) {
+  .top-bar-fixed .top-bar .summary .description {
+    max-width: 250px;
+  }
+
+  .top-bar-fixed .top-bar .another-city {
+    margin-left: auto;
+  }
 }

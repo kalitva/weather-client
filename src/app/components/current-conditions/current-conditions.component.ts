@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ObservableCity } from 'src/app/state/observable-city';
 import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { WeatherApiService } from 'src/app/services/weather-api.service';
-import { uvIndexScale } from 'src/app/util/measure-util';
 import { ObservableCurrentConditions } from 'src/app/state/observable-current-conditions';
 import { ErrorState } from 'src/app/state/error-state';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -39,9 +38,5 @@ export class CurrentConditionsComponent implements OnInit {
         },
       });
     });
-  }
-
-  uvIndexScale(uvIndex: number | undefined): string {
-    return uvIndexScale(uvIndex ?? 0);
   }
 }
