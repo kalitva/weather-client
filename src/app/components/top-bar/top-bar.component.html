@@ -11,6 +11,7 @@
           #input_city
           id="input-city"
           class="input-city"
+          autocomplete="off"
           *ngIf="showInput"
           (keypress)="restrictChars($event)"
           (keydown.enter)="navigateToCity(input_city.value.trim())"
