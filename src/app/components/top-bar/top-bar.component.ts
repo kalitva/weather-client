@@ -53,11 +53,6 @@ export class TopBarComponent implements OnInit {
     }
   }
 
-  // TODO fix - this permits only the latin symbols
-  restrictChars(event: KeyboardEvent): boolean {
-    return /[\w|\-|\s]/.test(event.key);
-  }
-
   setSuggestion(city: string): void {
     this.inputCity.nativeElement.value = city;
   }

@@ -13,7 +13,6 @@
           class="input-city"
           autocomplete="off"
           *ngIf="showInput"
-          (keypress)="restrictChars($event)"
           (keydown.enter)="navigateToCity(input_city.value.trim())"
           (keydown.escape)="closeInput()"
           (keydown.arrowDown)="city_autocomplete.moveDown()"

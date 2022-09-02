@@ -1,8 +1,8 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import {TopBarComponent} from './components/top-bar/top-bar.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { GeolocationService } from './services/geolocation.service';
 import { WeatherApiService } from './services/weather-api.service';
 import { ErrorState } from './state/error-state';
