@@ -5,7 +5,6 @@
 .top-bar-fixed .top-bar {
   display: flex;
   align-items: center;
-  column-gap: 1.5rem;
   padding: 1.5rem 1rem;
 }
 
@@ -17,6 +16,7 @@
 }
 
 .top-bar-fixed .top-bar .summary {
+  padding: 0 1rem;
   font-size: 2.1rem;
   font-weight: var(--normal);
 }
@@ -34,12 +34,12 @@
 
 .top-bar-fixed .top-bar .summary .time {
   font-size: 1.3rem;
+  padding-right: 1rem;
   padding-top: 0.5rem;
 }
 
 .top-bar-fixed .top-bar .summary .timezone {
   font-size: 1.1rem;
-  padding: 0 1rem;
   opacity: 0.5;
 }
 
@@ -72,7 +72,7 @@
 
 @media screen and (max-width: 600px) {
   .top-bar-fixed .top-bar .summary .description {
-    max-width: 250px;
+    max-width: 19rem;
   }
 
   .top-bar-fixed .top-bar .another-city {

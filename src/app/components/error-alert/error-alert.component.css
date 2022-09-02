@@ -24,3 +24,9 @@
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .error {
+    top: 13rem;
+  }
+}

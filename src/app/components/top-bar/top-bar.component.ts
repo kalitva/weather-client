@@ -10,7 +10,6 @@ import { CurrentConditions } from 'src/app/model/current-conditions.model';
 import { LoadingStateManager } from 'src/app/state/loading-state-manager';
 import { ErrorState } from 'src/app/state/error-state';
 import { CityAutocompleteComponent } from '../city-autocomplete/city-autocomplete.component';
-import { State } from 'src/app/state/state';
 
 const DELAY_BEFORE_CLOSE_INPUT = 300;
 
@@ -41,6 +40,7 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.tryToDetectCity();
+    // TODO try to move to the app component
     this.activatedRout.queryParams.subscribe(params => {
       const city = params['city'];
       if (city) {

@@ -2,7 +2,6 @@
   display: flex;
   column-gap: 0.65rem;
   overflow: auto;
-  cursor: pointer;
   scrollbar-width: none;
   user-select: none;
 }
