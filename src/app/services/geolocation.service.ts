@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
-import { OriginAware } from './origin-aware';
+import { Origin } from './origin';
 
-export abstract class GeolocationService extends OriginAware {
+export abstract class GeolocationService extends Origin {
   static readonly DEFAULT_CITY = 'Moscow';
 
   abstract detectCity(): Observable<string>;

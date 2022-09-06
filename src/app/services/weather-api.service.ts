@@ -2,9 +2,9 @@ import { Observable } from 'rxjs';
 import { CurrentConditions } from '../model/current-conditions.model';
 import { Day } from '../model/day.model';
 import { Hour } from '../model/hour.model';
-import { OriginAware } from './origin-aware';
+import { Origin } from './origin';
 
-export abstract class WeatherApiService extends OriginAware {
+export abstract class WeatherApiService extends Origin {
 
   abstract hoursForecast(city: string): Observable<Hour[]>;
 

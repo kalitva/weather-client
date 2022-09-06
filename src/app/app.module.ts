@@ -19,11 +19,11 @@ import { ErrorAlertComponent } from './components/error-alert/error-alert.compon
 import { CityAutocompleteComponent } from './components/city-autocomplete/city-autocomplete.component';
 import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.service';
 import { BackgroundComponent } from './components/background/background.component';
-import { OriginAware } from './services/origin-aware';
+import { Origin } from './services/origin';
 import { DetailsComponent } from './components/details/details.component';
 import { TimeOutInterceptor } from './interceptors/time-out.interceptor';
 
-export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
+export const ORIGINS = new InjectionToken<Origin>('Origin');
 
 @NgModule({
   declarations: [
@@ -47,8 +47,8 @@ export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
     { provide: WeatherApiService, useClass: VisualCrossingWeatherApiService },
     { provide: GeolocationService, useClass: TrueWayGeolocationService },
     { provide: CitySearchService, useClass: GeoapifyCitySearchService },
-    { provide: ORIGIN_AWARES, useClass: VisualCrossingWeatherApiService, multi: true },
-    { provide: ORIGIN_AWARES, useClass: TrueWayGeolocationService, multi: true },
+    { provide: ORIGINS, useClass: VisualCrossingWeatherApiService, multi: true },
+    { provide: ORIGINS, useClass: TrueWayGeolocationService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseLoadingStateInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TimeOutInterceptor, multi: true },
