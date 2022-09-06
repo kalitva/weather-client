@@ -8,11 +8,11 @@ import {
 import { catchError, Observable, timeout } from 'rxjs';
 
 @Injectable()
-export class TimOutInterceptor implements HttpInterceptor {
+export class TimeOutInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(timeout(10_000), catchError(() => {
-      throw new Error('Connection time out');
+      throw new Error('Connection timed out');
     }));
   }
 }

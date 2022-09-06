@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { Observable, from, firstValueFrom } from 'rxjs';
 import { GeolocationService } from '../geolocation.service';
 
-const URL = 'https://trueway-geocoding.p.rapidapi.com/ReverseGeocode';
 
 /*
  * docs: https://rapidapi.com/trueway/api/trueway-geocoding/
@@ -14,6 +13,7 @@ export class TrueWayGeolocationService implements GeolocationService {
   constructor(private httpClient: HttpClient) {}
 
   detectCity(): Observable<string> {
+    const url = 'https://trueway-geocoding.p.rapidapi.com/ReverseGeocode';
     const headers = {
       'X-RapidAPI-Key': '61bb649c42msh7458574855e1682p16c9d8jsnbb57896d2662',
       'X-RapidAPI-Host': 'trueway-geocoding.p.rapidapi.com'
@@ -24,14 +24,14 @@ export class TrueWayGeolocationService implements GeolocationService {
     return from(
       new Promise<GeolocationCoordinates>(callback)
         .then(coords => ({ location: `${coords.latitude},${coords.longitude}`, language: 'en' }))
-        .then(params => firstValueFrom(this.httpClient.get(URL, { headers, params })))
+        .then(params => firstValueFrom(this.httpClient.get(url, { headers, params })))
         .then((data: any) => data.results[1].locality)
         .catch(e => { throw e; })
     );
   }
 
   getOrigin(): string {
-    return URL;
+    return 'https://trueway-geocoding.p.rapidapi.com';
   }
 }
 

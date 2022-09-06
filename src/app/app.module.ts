@@ -21,7 +21,7 @@ import { GeoapifyCitySearchService } from './services/impl/geoapify-city-search.
 import { BackgroundComponent } from './components/background/background.component';
 import { OriginAware } from './services/origin-aware';
 import { DetailsComponent } from './components/details/details.component';
-import { TimOutInterceptor } from './interceptors/tim-out.interceptor';
+import { TimeOutInterceptor } from './interceptors/time-out.interceptor';
 
 export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
 
@@ -51,7 +51,7 @@ export const ORIGIN_AWARES = new InjectionToken<OriginAware>('OriginAware');
     { provide: ORIGIN_AWARES, useClass: TrueWayGeolocationService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseLoadingStateInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheHttpInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TimOutInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TimeOutInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

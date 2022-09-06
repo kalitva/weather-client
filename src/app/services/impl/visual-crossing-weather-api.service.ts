@@ -59,6 +59,6 @@ export class VisualCrossingWeatherApiService implements WeatherApiService {
   }
 
   getOrigin(): string {
-    return 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services';
+    return 'https://weather.visualcrossing.com';
   }
 }
